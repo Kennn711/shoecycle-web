@@ -25,7 +25,7 @@
                                 <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
                                     <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                                         <a href="#" class="shrink-0 md:order-1">
-                                            <img class="h-20 w-20 dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="imac image" />
+                                            <img class="h-20 w-20 dark:hidden" src="{{ $item['image'] }}" alt="{{ $item['name'] }}" />
                                         </a>
                                         <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                                             <p class="text-base font-medium text-gray-900 dark:text-white">{{ $item['name'] }}</p>
@@ -130,14 +130,26 @@
                                     <dd class="text-base font-bold text-gray-900 dark:text-white">Rp {{ number_format(array_sum(array_map(function ($item) {return $item['price'] * $item['quantity'];}, $cart)),0,',','.') }}</dd>
                                 </dl>
                             </div>
-                            <form action="{{ route('checkout') }}" method="GET">
+                            <form action="{{ route('checkout.detail') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-
                                 @foreach ($cart as $id => $item)
                                     <input type="hidden" name="shoes_id[]" value="{{ $id }}">
                                 @endforeach
-                                <input type="file" class="mb-3">
-                                <button type="submit" class="flex w-full items-center justify-center rounded-lg bg-green-600 hover:bg-green-700 transition-colors duration-200 px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Kirim Bukti Pembayaran</button>
+                                <div class="flex items-center justify-center w-full mb-4">
+                                    <label for="file-upload" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <svg aria-hidden="true" class="w-8 h-8 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V12m0 0V8m0 4H3.5a2.5 2.5 0 00-2.5 2.5V17.5A2.5 2.5 0 003.5 20H5m14-4v4a2.5 2.5 0 002.5 2.5H20m-4-4v-4a2.5 2.5 0 00-2.5-2.5H12"></path>
+                                            </svg>
+                                            <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                            <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                            <p id="file-name" class="text-sm text-gray-500 mt-2"></p>
+                                        </div>
+                                        <input id="file-upload" name="proof_of_payment" type="file" class="hidden" onchange="showFileName()">
+                                    </label>
+                                </div>
+
+                                <button class="flex w-full items-center justify-center rounded-lg bg-green-600 hover:bg-green-700 transition-colors duration-200 px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Kirim Bukti Pembayaran</button>
                             </form>
 
                             <form action="{{ route('clear.cart') }}" method="POST">
@@ -155,5 +167,14 @@
                 </div>
             </div>
         </section>
+
+        {{-- Show File Name --}}
+        <script>
+            function showFileName() {
+                const input = document.getElementById('file-upload');
+                const fileNameDisplay = document.getElementById('file-name');
+                fileNameDisplay.textContent = input.files.length > 0 ? input.files[0].name : 'No file chosen';
+            }
+        </script>
     @endif
 @endsection

@@ -19,6 +19,15 @@ class TransactionController extends Controller
         ]);
     }
 
+    function indexCustomer()
+    {
+        $customerId = Auth::id();
+        $transactions = Transaction::with(["transactiondetails", "user", "driver"])->where("user_id", $customerId)->get();
+        return view("transaction.transaction-history", [
+            'transaction' => $transactions
+        ]);
+    }
+
     public function payment()
     {
         return view("payment.payment");
@@ -62,13 +71,16 @@ class TransactionController extends Controller
 
     public function storeTransaction(Request $request)
     {
+        $cart = session('cart'); // mengambil data session keranjang
+        $user = Auth::user(); // mengambil data user yang sedang login
 
         $validation = $request->validate([
             'proof_of_payment' => 'required|image|mimes:jpeg,jpg,png',
         ]);
 
-        $cart = session('cart'); // mengambil data session keranjang
-        $user = Auth::user(); // mengambil data user yang sedang login
+        if (empty($user->no_hp) || empty($user->address)) {
+            return redirect()->route("complete.profile")->withErrors(['message' => 'Mohon Lengkapi No HP dan Alamat sebelum melanjutkan checkout']);
+        }
 
         // membuat kode resi
         $code = 'SYC-' . rand(10000, 99999);

@@ -6,7 +6,7 @@
                 <a class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-green-400 flex items-center justify-center transition-all" href="#">
                     <ion-icon name="logo-instagram"></ion-icon>
                 </a>
-                <a class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-green-400 flex items-center justify-center transition-all" href="#">
+                <a href="https://github.com/Kennn711" class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-green-400 flex items-center justify-center transition-all" href="#">
                     <ion-icon name="logo-github"></ion-icon>
                 </a>
             </div>
@@ -22,7 +22,7 @@
                                 <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-900  transition-all ease-in-out"></span>
                             </li>
                             <li class="nav_items relative">
-                                <a href="#Home">RIWAYAT TRANSAKSI</a>
+                                <a href="{{ route('transaction-customer.index') }}">RIWAYAT TRANSAKSI</a>
                                 <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-900  transition-all ease-in-out"></span>
                             </li>
                         </ul>

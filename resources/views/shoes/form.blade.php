@@ -39,15 +39,55 @@
                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi Sepatu</label>
                     <textarea style="resize: none" id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan Deskripsi Sepatu"></textarea>
                 </div>
+
+                <!-- Tombol Tambah berada di bawah deskripsi -->
                 <div class="relative z-0 w-full mb-5 group">
+                    <button type="button" class="tambah mb-2 text-white bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600 transition-colors duration-200">Tambah Gambar</button>
+                </div>
+
+                <!-- Input File dan Tombol Delete -->
+                <div class="relative z-0 w-full mb-5 group file-inputs">
                     <label for="file_input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar Sepatu</label>
-                    <input id="file_input" name="image[]" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" multiple>
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG, atau GIF (MAX. 800x400px).</p>
+                    <div class="flex items-center gap-2">
+                    </div>
                 </div>
                 <button class="w-full font-semibold uppercase transition-colors duration-200 text-white bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600">TAMBAH</button>
             </form>
         </div>
     </div>
+
+    <script src="{{ asset('assets/jquery/jquery.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $(".tambah").on("click", function() {
+                let fileInput = `
+            <div class="flex items-center gap-2 mt-2">
+                <input name="image[]" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" multiple>
+                <button type="button" class="delete-input text-white bg-red-500 px-3 py-2 rounded-lg hover:bg-red-600 transition-colors duration-200">Delete</button>
+            </div>`;
+
+                $(this).closest('.relative').next('.file-inputs').append(fileInput);
+
+                updateDeleteButtons();
+            });
+
+            $(document).on("click", ".delete-input", function() {
+                $(this).closest('.flex').remove();
+
+                updateDeleteButtons();
+            });
+
+            function updateDeleteButtons() {
+                const fileInputs = $("input[type='file']");
+                if (fileInputs.length <= 1) {
+                    $(".delete-input").hide();
+                } else {
+                    $(".delete-input").show();
+                }
+            }
+        });
+    </script>
+
 @endsection
 
 @extends('layouts.partial.script')

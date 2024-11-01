@@ -64,38 +64,40 @@
                                                 <span class="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">{{ $see->description }}</span>
                                             </td>
                                             <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                                @foreach ($see->imagedetail as $index => $detail)
-                                                    <!-- Buat ID Modal Dinamis -->
-                                                    @php $modalId = "modal-" . $see->id . "-" . $index; @endphp
+                                                <!-- Buat ID Modal Dinamis -->
+                                                @php $modalId = "modal-" . $see->id . "-" ; @endphp
 
-                                                    <!-- Tombol Lihat Gambar -->
-                                                    <button data-modal-target="{{ $modalId }}" data-modal-toggle="{{ $modalId }}" class="text-white bg-blue-800 hover:bg-blue-900 transition-colors duration-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                                                        LIHAT GAMBAR
-                                                    </button>
+                                                <!-- Tombol Lihat Gambar -->
+                                                <button data-modal-target="{{ $modalId }}" data-modal-toggle="{{ $modalId }}" class="text-white bg-blue-800 hover:bg-blue-900 transition-colors duration-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                                    LIHAT GAMBAR
+                                                </button>
 
-                                                    <!-- Main Modal -->
-                                                    <div id="{{ $modalId }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                                        <div class="relative p-4 w-full max-w-2xl max-h-full">
-                                                            <!-- Modal content -->
-                                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                                <!-- Modal header -->
-                                                                <div class="flex items-center justify-between p-4 md:p-5 shadow- border-b rounded-t bg-blue-900 dark:border-gray-600">
-                                                                    <h3 class="text-xl font-semibold uppercase text-white dark:text-white">
-                                                                        Gambar {{ $see->name }}
-                                                                    </h3>
-                                                                </div>
-                                                                <!-- Modal body -->
-                                                                <div class="p-4 md:p-5 space-y-4">
-                                                                    <img src="{{ asset($detail->image) }}" width="100%">
-                                                                </div>
-                                                                <!-- Modal footer -->
-                                                                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                                                    <button data-modal-hide="{{ $modalId }}" type="button" class="h-12 text-white w-full transition-colors duration-200 bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-duration-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600">TUTUP</button>
-                                                                </div>
+                                                <!-- Main Modal -->
+                                                <div id="{{ $modalId }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                                                        <!-- Modal content -->
+                                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                            <!-- Modal header -->
+                                                            <div class="flex items-center justify-between p-4 md:p-5 shadow- border-b rounded-t bg-blue-900 dark:border-gray-600">
+                                                                <h3 class="text-xl font-semibold uppercase text-white dark:text-white">
+                                                                    Gambar {{ $see->name }}
+                                                                </h3>
+                                                            </div>
+                                                            <!-- Modal body -->
+                                                            <div class="owl-carousel owl-theme p-4 md:p-5 space-y-4">
+                                                                @foreach ($see->imagedetail as $index => $detail)
+                                                                    <div class="item">
+                                                                        <img src="{{ asset($detail->image) }}" class="w-[300px] h-[300px] object-cover">
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                            <!-- Modal footer -->
+                                                            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                                <button data-modal-hide="{{ $modalId }}" type="button" class="h-12 text-white w-full transition-colors duration-200 bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-duration-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600">TUTUP</button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endforeach
+                                                </div>
                                             </td>
 
                                             @php

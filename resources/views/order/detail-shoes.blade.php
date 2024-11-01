@@ -7,12 +7,12 @@
         <div class="flex flex-wrap -mx-4">
             <!-- Product Images -->
             <div class="w-full md:w-1/2 px-4 mb-8">
-                @foreach ($shoes->imagedetail as $see)
-                    <img src="{{ asset($see->image) }}" alt="Product" class="w-full h-auto rounded-lg shadow-md mb-4" id="mainImage">
-                    <div class="flex gap-4 py-4 justify-center overflow-x-auto">
+                <img src="{{ asset($shoes->imagedetail[0]->image) }}" alt="Product" class="w-[700px] h-[500px] rounded-lg shadow-md mb-4" id="mainImage">
+                <div class="flex gap-4 py-4 justify-center overflow-x-auto">
+                    @foreach ($shoes->imagedetail as $see)
                         <img src="{{ asset($see->image) }}" alt="Thumbnail 1" class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300" onclick="changeImage(this.src)">
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
 
             <!-- Product Details -->

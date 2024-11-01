@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get("payment", [TransactionController::class, 'payment'])->name("payment.view");
     Route::get("order", [ShoesController::class, 'order'])->name("order.view");
     Route::get("order-detail/{id}/order", [ShoesController::class, 'orderDetail'])->name("order-detail.view");
+    Route::get("transaction-history", [TransactionController::class, "indexCustomer"])->name("transaction-customer.index");
 
     // Tampilan Cart
     Route::post("cart/add/{id}", [CartController::class, 'addToCart'])->name("add.cart");
