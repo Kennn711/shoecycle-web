@@ -128,6 +128,11 @@ class TransactionController extends Controller
         session()->forget('cart');
 
         // Redirect ke halaman transaction dengan success
+
+        $user = Auth::user();
+        if ($user->role == 'customer') {
+            return redirect()->route("transaction-customer.index")->with("success", "Transaksi Berhasil");
+        }
         return redirect()->route("transaction.index")->with('success', 'Transaksi Berhasil');
     }
 

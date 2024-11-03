@@ -1,13 +1,13 @@
 <header class="header w-full">
     <!--! topHeader -->
     <div class="top-header w-screen flex flex-col items-center justify-between border-b">
-        <div class="flex w-full bg-green-800 items-center justify-between p-4 md:px-20 border-b">
+        <div class="flex w-full bg-green-800 items-center justify-between p-5 md:px-20 border-b">
             <div class="icons hidden lg:flex items-center gap-2">
-                <a class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-green-400 flex items-center justify-center transition-all" href="#">
-                    <ion-icon name="logo-instagram"></ion-icon>
+                <a href="" class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-green-400 flex items-center justify-center transition-all">
+                    <i class="bi bi-instagram text-xl"></i>
                 </a>
-                <a href="https://github.com/Kennn711" class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-green-400 flex items-center justify-center transition-all" href="#">
-                    <ion-icon name="logo-github"></ion-icon>
+                <a href="https://github.com/Kennn711" class="text-gray-700 bg-gray-300/50 p-1 rounded-md hover:scale-110 hover:text-white hover:bg-green-400 flex items-center justify-center transition-all">
+                    <i class="bi bi-github text-xl"></i>
                 </a>
             </div>
         </div>

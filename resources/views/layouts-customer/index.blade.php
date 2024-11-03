@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/uicons-bold-rounded/css/uicons-bold-rounded.css') }}">
     {{-- Template CSS --}}
     <link rel="stylesheet" href="{{ asset('eCommerce_tailwind_template-master') }}/assets/style.css" />
+    <link rel="stylesheet" href="{{ asset('assets/sweetalert/sweetalert.min.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         tailwind.config = {
@@ -33,8 +34,7 @@
 
     @include('layouts-customer/partial/footer')
     <!--! icons -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="{{ asset('assets/sweetalert/sweetalert.min.js') }}"></script>
     <!--!javascript file  -->
     <script type="module" src="{{ asset('eCommerce_tailwind_template-master') }}/assets/index.js"></script>
 </body>
