@@ -34,19 +34,31 @@
             </form>
             <div class="icons hidden mr-2 text-3xl md:flex gap-8 text-gray-600">
                 <div class="relative">
-                    <a href="{{ route('complete.profile') }}">
-                        <i class="bi bi-person-gear text-green-900"></i>
-                    </a>
+
+                    <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" src="{{ asset('uploads/avatar/' . Auth::user()->avatar) }}" alt="User dropdown" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+
+                    <!-- Dropdown menu -->
+                    <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                            <div>Hai, {{ Auth::user()->name }} !</div>
+                            <div class="font-medium truncate">{{ Auth::user()->email }}</div>
+                        </div>
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+                            <li>
+                                <a href="{{ route('complete.profile') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pengaturan Akun</a>
+                            </li>
+                        </ul>
+                        <div class="py-1">
+                            <a href="{{ route('auth.logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                <i class="bi bi-box-arrow-in-right text-green-900"></i> Keluar</a>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="relative">
                     <a href="{{ route('view.cart') }}">
                         <span class="text-xs text-center font-semibold text-white absolute -top-2 -right-2 w-4 h-4 bg-green-900 rounded-full">{{ session('count_cart') }}</span>
                         <i class="bi bi-cart4 text-green-900"></i>
-                    </a>
-                </div>
-                <div class="relative">
-                    <a href="{{ route('auth.logout') }}">
-                        <i class="bi bi-box-arrow-in-right text-green-900"></i>
                     </a>
                 </div>
             </div>

@@ -72,6 +72,10 @@ Route::get("main-customer", function () {
     return view("layouts-customer.index");
 });
 
+Route::get("backend", function () {
+    return view("backend.main");
+});
+
 Route::get("testing", function () {
-    return view("test");
+    return view("layouts-backend/index");
 });

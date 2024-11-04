@@ -73,7 +73,7 @@ class SessionController extends Controller
     {
         Auth::logout();
 
-        return redirect()->route("welcome.view");
+        return redirect()->route("login");
     }
 
 

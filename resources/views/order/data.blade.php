@@ -7,7 +7,7 @@
     @if ($shoes->isEmpty())
         <p>Tidak ada sepatu yang tersedia.</p>
     @else
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-4 max-w-full mx-40 mt-20">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-4 max-w-full mx-40 mt-20 mb-20">
             @foreach ($shoes as $see)
                 <div class="bg-white rounded-lg shadow-lg p-4">
                     <div class="relative overflow-hidden">

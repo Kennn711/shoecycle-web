@@ -2,6 +2,7 @@
 @section('title-frontend', 'ShoeCycle | Riwayat Transaksi')
 @section('content-frontend')
     <div class="shadow-lg rounded-lg overflow-x-auto mx-4 md:mx-10 mt-28">
+        <h1 class="text-center mb-5 font-bold uppercase text-2xl">Riwayat Transaksi yang Anda Lakukan</h1>
         <table class="min-w-full divide-y divide-gray-200">
             <thead>
                 <tr class="bg-gray-200">
@@ -215,14 +216,19 @@
                             @endif
                         </td>
                         <td class="hidden md:table-cell py-4 px-6 border-b border-gray-200">
-                            @if ($see->delivery_status == 'pending' || is_null($see->delivery_status))
+                            @if ($see->transaction_status == 'pending' && is_null($see->delivery_status))
                                 <button disabled class="text-sm w-40 font-semibold bg-gray-300 uppercase text-white px-5 py-2.5 rounded-lg">PENDING</button>
                             @endif
+                            @if ($see->transaction_status == 'cancelled' && is_null($see->delivery_status))
+                                <button disabled class="text-sm w-40 font-semibold uppercase bg-red-700 text-white px-5 py-2.5 rounded-lg">DIBATALKAN</button>
+                            @endif
                             @if ($see->delivery_status == 'shipped')
-                                <button disabled class="text-sm font-semibold uppercase bg-yellow-300 text-white px-5 py-2.5 rounded-lg">DIKIRIM <i class="bi bi-truck text-sm"></i></button>
+                                <button disabled class="text-sm w-40 font-semibold uppercase bg-yellow-300 text-white px-5 py-2.5 rounded-lg">DIKIRIM <i class="bi bi-truck text-sm"></i></button>
                             @endif
                             @if ($see->delivery_status == 'delivered')
-                                <button disabled class="text-sm font-semibold uppercase bg-green-700 text-white px-5 py-2.5 rounded-lg">TERKIRIM</button>
+                                <button disabled class="text-sm w-40 font-semibold uppercase bg-green-700 text-white px-5 py-2.5 rounded-lg">TERKIRIM</button>
+                            @endif
+                            @if ($see->transaction_status == 'cancelled')
                             @endif
                         </td>
                     </tr>
