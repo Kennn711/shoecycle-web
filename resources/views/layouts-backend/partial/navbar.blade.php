@@ -1,5 +1,5 @@
 <div class = "fixed w-full z-30 flex bg-white dark:bg-[#0F172A] p-2 items-center justify-center h-16 px-10">
-    <div class = "logo ml-12 dark:text-white  transform ease-in-out duration-500 flex-none h-full flex items-center justify-center">
+    <div class = "logo ml-12 dark:text-white font-bold transform ease-in-out duration-500 flex-none h-full flex items-center justify-center">
         ShoeCycle
     </div>
     <!-- SPACER -->
@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <div class = "hidden md:block text-sm md:text-md text-black dark:text-white">John Doe</div>
+            <div class = "hidden md:block text-sm md:text-md text-black dark:text-white uppercase font-semibold">{{ Auth::user()->name }}</div>
         </div>
 
     </div>

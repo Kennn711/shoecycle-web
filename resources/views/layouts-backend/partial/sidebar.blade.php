@@ -39,7 +39,7 @@
         <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <i class="fi-br-boot-heeled w-4 h-5"></i>
             <div>
-                <a href="">
+                <a href="{{ route('shoes.index') }}">
                     Data Sepatu
                 </a>
             </div>
@@ -47,8 +47,16 @@
         <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <i class="bi bi-receipt w-4 h-5"></i>
             <div>
-                <a href="">
+                <a href="{{ route('transaction.index') }}">
                     Data Transaksi
+                </a>
+            </div>
+        </div>
+        <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            <i class="bi bi-receipt w-4 h-5"></i>
+            <div>
+                <a href="">
+                    Kelola Driver
                 </a>
             </div>
         </div>
@@ -60,6 +68,9 @@
         </div>
         <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
             <i class="fi-br-boot-heeled w-4 h-2"></i>
+        </div>
+        <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+            <i class="bi bi-receipt w-4 h-2"></i>
         </div>
         <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
             <i class="bi bi-receipt w-4 h-2"></i>
