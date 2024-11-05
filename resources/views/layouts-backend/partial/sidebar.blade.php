@@ -31,7 +31,7 @@
         <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <i class="fi-br-dashboard-panel w-4 h-5"></i>
             <div>
-                <a href="">
+                <a href="{{ route('page.dashboard') }}">
                     Dashboard
                 </a>
             </div>
@@ -55,7 +55,7 @@
         <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <i class="bi bi-receipt w-4 h-5"></i>
             <div>
-                <a href="">
+                <a href="{{ route('driver.index') }}">
                     Kelola Driver
                 </a>
             </div>

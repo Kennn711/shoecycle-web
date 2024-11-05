@@ -1,103 +1,78 @@
-@extends('layouts.main')
+@extends('layouts-backend/index')
 
-@section('title', 'Dashboard')
-@section('page_title', 'Dashboard')
+@section('backend-title', 'Admin | Dashboard')
+@section('breadcumb-role', 'Admin')
+@section('breadcumb-title', 'Dashboard')
 
-@section('content')
-    <div class="w-full px-6 py-6 mx-auto my-32">
-        <!-- row 1 -->
-        <div class="flex flex-wrap -mx-3">
-            <!-- card1 -->
-            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white dark:bg-gray-800 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                    <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
-                            <div class="flex-none w-2/3 max-w-full px-3">
-                                <div>
-                                    <p class="mb-0 font-sans  text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-100">
-                                        Jumlah Sepatu yang Tersedia</p>
-                                    <h5 class="mb-2 font-bold dark:text-blue-600">{{ $shoesCount }}</h5>
-                                </div>
-                            </div>
-                            <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-blue-500 to-violet-500">
-                                    <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
+@section('backend-content')
+    <div class="flex flex-wrap my-5 -mx-2">
+        <!-- Card 1 -->
+        <div class="w-full md:w-1/4 p-2">
+            <div class="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+                <div class="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12">
+                    <i class="bi bi-people-fill text-3xl object-scale-down transition duration-500"></i>
+                </div>
+                <div class="flex flex-col justify-around flex-grow ml-5 text-white">
+                    <div class="text-sm whitespace-nowrap">
+                        Jumlah Akun Customer
+                    </div>
+                    <div>
+                        {{ $customerCount }}
                     </div>
                 </div>
             </div>
-            <!-- card1 END -->
+        </div>
 
-            <!-- card2 -->
-            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white dark:bg-gray-800 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                    <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
-                            <div class="flex-none w-2/3 max-w-full px-3">
-                                <div>
-                                    <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-100">
-                                        Jumlah Akun Customer</p>
-                                    <h5 class="mb-2 font-bold dark:text-blue-600">{{ $customerCount }}</h5>
-                                </div>
-                            </div>
-                            <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-red-600 to-orange-600">
-                                    <i class="ni leading-none ni-world text-lg relative top-3.5 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Card 2 -->
+        <div class="w-full md:w-1/4 p-2">
+            <div class="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+                <div class="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12">
+                    <i class="bi bi-truck text-3xl object-scale-down transition duration-500"></i>
+                </div>
+                <div class="flex flex-col justify-around flex-grow ml-5 text-white">
+                    <div class="text-sm whitespace-nowrap">
+                        Jumlah Akun Driver
+                    </div>
+                    <div>
+                        {{ $driverCount }}
                     </div>
                 </div>
             </div>
-            <!-- card2 END -->
+        </div>
 
-            <!-- card3 -->
-            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white dark:bg-gray-800 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                    <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
-                            <div class="flex-none w-2/3 max-w-full px-3">
-                                <div>
-                                    <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-100">
-                                        Jumlah Transaksi</p>
-                                    <h5 class="mb-2 font-bold dark:text-blue-600">{{ $transactionCount }}</h5>
-                                </div>
-                            </div>
-                            <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
-                                    <i class="ni leading-none ni-paper-diploma text-lg relative top-3.5 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Card 3 -->
+        <div class="w-full md:w-1/4 p-2">
+            <div class="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+                <div class="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12">
+                    <i class=" fi-br-hiking-boot text-3xl object-scale-down transition duration-500"></i>
+                </div>
+                <div class="flex flex-col justify-around flex-grow ml-5 text-white">
+                    <div class="text-sm whitespace-nowrap">
+                        Jumlah Sepatu yang Tersedia
+                    </div>
+                    <div>
+                        {{ $shoesCount }}
                     </div>
                 </div>
-            </div>
-            <!-- card3 END -->
 
-            <!-- card4 -->
-            <div class="w-full max-w-full px-3 sm:w-1/2 sm:flex-none xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white dark:bg-gray-800 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                    <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
-                            <div class="flex-none w-2/3 max-w-full px-3">
-                                <div>
-                                    <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-100">
-                                        Jumlah Driver</p>
-                                    <h5 class="mb-2 font-bold dark:text-blue-600">{{ $driverCount }}</h5>
-                                </div>
-                            </div>
-                            <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-orange-500 to-yellow-500">
-                                    <i class="ni leading-none ni-cart text-lg relative top-3.5 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="w-full md:w-1/4 p-2">
+            <div class="flex items-center flex-row w-full bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500 from-indigo-500 via-purple-500 to-pink-500 rounded-md p-3">
+                <div class="flex text-indigo-500 dark:text-white items-center bg-white dark:bg-[#0F172A] p-2 rounded-md flex-none w-8 h-8 md:w-12 md:h-12">
+                    <i class="bi bi-receipt-cutoff text-3xl object-scale-down transition duration-500"></i>
+                </div>
+                <div class="flex flex-col justify-around flex-grow ml-5 text-white">
+                    <div class="text-sm whitespace-nowrap">
+                        Jumlah Transaksi yang Dilakukan
+                    </div>
+                    <div>
+                        {{ $transactionCount }}
                     </div>
                 </div>
+
             </div>
-            <!-- card4 END -->
         </div>
     </div>
 @endsection

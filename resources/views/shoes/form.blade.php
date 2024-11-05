@@ -13,7 +13,7 @@
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div class="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-lg">
             <div class="text-center">
-                <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
+                <h1 class="text-3xl font-bold text-gray-800 sm:text-3xl dark:text-white">
                     Form Tambah Sepatu
                 </h1>
                 <hr class="mt-8 border-gray-300 dark:border-gray-700">
@@ -69,7 +69,9 @@
                         <!-- Container untuk input gambar yang ditambahkan -->
                     </div>
 
-                    <div class="mt-6 grid">
+                    <hr class="mt-8 border-gray-300 dark:border-gray-700">
+
+                    <div class="mt-8 grid">
                         <button class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#1E293B] text-white hover:rounded-3xl duration-300 focus:outline-none focus:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none">Tambah</button>
                     </div>
                 </form>
