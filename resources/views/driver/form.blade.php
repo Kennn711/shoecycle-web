@@ -18,56 +18,85 @@
                     <h2 class="text-3xl font-bold text-gray-800 sm:text-3xl text-center dark:text-white">Tambah Akun Driver</h2>
                     <hr class="mt-8 border-gray-300 dark:border-gray-700">
 
-                    <div class="grid max-w-2xl mx-auto mt-8">
-                        <div class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
+                    <form action="{{ route('driver.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="grid max-w-2xl mx-auto mt-8">
+                            <div class="mx-auto w-64 text-center">
+                                <div class="relative w-64 h-64 cursor-pointer" onclick="document.getElementById('avatar').click();">
+                                    <img id="preview-img" class="w-64 h-64 rounded-full object-cover shadow-2xl" src="{{ asset('uploads/avatar/empty-avatar.png') }}" alt="Foto Profil Driver" />
+                                    <div class="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-full absolute top-0 left-0 flex justify-center items-center transition duration-500">
+                                        <i class="bi bi-upload hidden group-hover:block w-12 text-4xl"></i>
+                                    </div>
+                                </div>
+                                <input type="file" id="avatar" name="avatar" class="hidden" accept="image/*" onchange="previewFile()" required>
+                                <!-- Tambahkan elemen ini untuk menampilkan nama file -->
+                                <p id="file-name" class="mt-2 text-sm text-gray-600"></p>
+                            </div>
 
-                            <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-[#1E293B] dark:ring-[#1E293B]" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Bordered avatar">
+                            <script>
+                                function previewFile() {
+                                    const fileInput = document.getElementById('avatar');
+                                    const previewImg = document.getElementById('preview-img');
+                                    const fileNameDisplay = document.getElementById('file-name');
 
-                            <div class="flex flex-col space-y-5 sm:ml-8">
-                                <button type="button" class="py-2 px-4 text-base font-medium text-white focus:outline-none bg-[#1E293B] rounded-lg border border-indigo-200 hover:rounded-xl duration-300 focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
-                                    <i class="bi bi-upload text-xl"></i>
-                                </button>
+                                    const file = fileInput.files[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            previewImg.src = e.target.result;
+                                        };
+                                        reader.readAsDataURL(file);
+
+                                        // Tampilkan nama file di bawah gambar
+                                        fileNameDisplay.textContent = file.name;
+                                    } else {
+                                        previewImg.src = 'https://images.pexels.com/photos/2690323/pexels-photo-2690323.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
+                                        fileNameDisplay.textContent = '';
+                                    }
+                                }
+                            </script>
+
+
+
+                            <div class="items-center mt-8 sm:mt-14 text-[#202142]">
+
+                                <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                                    <div class="w-full">
+                                        <label for="first_name" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                                            Username</label>
+                                        <input type="text" id="first_name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Username Driver" required>
+                                    </div>
+
+                                    <div class="w-full">
+                                        <label for="password" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                                            Password</label>
+                                        <input type="password" id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Password Akun" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="mb-2 sm:mb-6">
+                                    <label for="email" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Email</label>
+                                    <input type="email" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Email Akun" required>
+                                </div>
+
+                                <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                                    <div class="w-full">
+                                        <label for="no_hp" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Nomor Telepon</label>
+                                        <input type="number" id="no_hp" name="no_hp" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Nomor Telepon Driver" required>
+                                    </div>
+
+                                    <div class="w-full">
+                                        <label for="address" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Alamat</label>
+                                        <input type="text" id="address" name="address" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Alamat Driver" required>
+                                    </div>
+
+                                </div>
+                                <hr class="mt-8 border-gray-300 dark:border-gray-700">
+                                <button class="w-full mt-8 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#1E293B] text-white hover:rounded-3xl duration-300 focus:outline-none focus:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none">Tambah</button>
                             </div>
                         </div>
-
-                        <div class="items-center mt-8 sm:mt-14 text-[#202142]">
-
-                            <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                                <div class="w-full">
-                                    <label for="first_name" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
-                                        Username</label>
-                                    <input type="text" id="first_name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Username Driver" required>
-                                </div>
-
-                                <div class="w-full">
-                                    <label for="password" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
-                                        Password</label>
-                                    <input type="password" id="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Password Akun" required>
-                                </div>
-
-                            </div>
-
-                            <div class="mb-2 sm:mb-6">
-                                <label for="email" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Email</label>
-                                <input type="email" id="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Email Akun" required>
-                            </div>
-
-                            <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                                <div class="w-full">
-                                    <label for="no_hp" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Nomor Telepon</label>
-                                    <input type="number" id="no_hp" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Nomor Telepon Driver" required>
-                                </div>
-
-                                <div class="w-full">
-                                    <label for="address" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Alamat</label>
-                                    <input type="text" id="address" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Alamat Driver" required>
-                                </div>
-
-                            </div>
-                            <hr class="mt-8 border-gray-300 dark:border-gray-700">
-                            <button type="submit" class="w-full mt-8 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#1E293B] text-white hover:rounded-3xl duration-300 focus:outline-none focus:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none">Tambah</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </main>

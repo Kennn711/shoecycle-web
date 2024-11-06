@@ -52,11 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::resource("driver", DriverController::class);
 });
 
-// Landing Page
-Route::get('/', [SessionController::class, 'index'])->name("welcome.view");
-
 // Page Auth (Login / Register)
-Route::get("login", [SessionController::class, 'loginPage'])->name("login");
+Route::get("/", [SessionController::class, 'loginPage'])->name("login");
 Route::get("register", [SessionController::class, 'registerPage'])->name("register");
 
 // Validasi

@@ -1,94 +1,105 @@
-@extends('layouts.main')
+@extends('layouts-backend/index')
 
-@section('title', 'FORM EDIT DRIVER')
-@section('page_title', 'Data Driver')
+@section('backend-title', 'Admin | Edit Akun Driver')
+@section('breadcumb-role', 'Admin')
+@section('breadcumb-title', 'Kelola Driver')
+@push('breadcumb-sub-title')
+    <svg class = "w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
+    </svg>
+    <p class = "ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Edit Akun Driver</p>
+@endpush
 
-@section('content')
-    <div class="w-1/2 mx-auto my-32">
-        <div class="shadow-md p-6 bg-blue-900 dark:bg-gray-800 rounded-t-lg">
-            <div class="flex justify-between items-center mb-1">
-                <h2 class="text-2xl font-bold mb-2 text-white uppercase dark:text-white">Form Edit Driver</h2>
-                <a href="{{ route('driver.index') }}" class="font-semibold text-2xl uppercase text-white px-4 py-1 rounded-lg">
-                    <button class="bg-white text-center w-32 rounded-2xl h-12 relative text-black text-xl font-semibold group" type="button">
-                        <div class="bg-green-400 rounded-xl h-10 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[120px] z-10 duration-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="25px" width="25px">
-                                <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" fill="#000000"></path>
-                                <path d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" fill="#000000"></path>
-                            </svg>
+@section('backend-content')
+    <div class="flex justify-center items-center min-h-screen">
+        <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
+            <div class="p-2 md:p-4 flex justify-center">
+                <div class="w-full px-6 pb-8 mt-8 pt-8 sm:max-w-xl rounded-3xl shadow-xl bg-white">
+                    <h2 class="text-3xl font-bold text-gray-800 sm:text-3xl text-center dark:text-white">Edit Akun Driver</h2>
+                    <hr class="mt-8 border-gray-300 dark:border-gray-700">
+
+                    <form action="{{ route('driver.update', $driver->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="grid max-w-2xl mx-auto mt-8">
+                            <div class="mx-auto w-64 text-center">
+                                <div class="relative w-64 h-64 cursor-pointer" onclick="document.getElementById('avatar').click();">
+                                    <img id="preview-img" class="w-64 h-64 rounded-full object-cover shadow-2xl" src="{{ asset('uploads/avatar/' . $driver->avatar) }}" alt="Foto Profil Driver" />
+                                    <div class="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-full absolute top-0 left-0 flex justify-center items-center transition duration-500">
+                                        <i class="bi bi-upload hidden group-hover:block w-12 text-4xl"></i>
+                                    </div>
+                                </div>
+                                <input type="file" id="avatar" name="avatar" class="hidden" accept="image/*" onchange="previewFile()">
+                                <!-- Tambahkan elemen ini untuk menampilkan nama file -->
+                                <p id="file-name" class="mt-2 text-sm text-gray-600"></p>
+                            </div>
+
+                            <script>
+                                function previewFile() {
+                                    const fileInput = document.getElementById('avatar');
+                                    const previewImg = document.getElementById('preview-img');
+                                    const fileNameDisplay = document.getElementById('file-name');
+
+                                    const file = fileInput.files[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            previewImg.src = e.target.result;
+                                        };
+                                        reader.readAsDataURL(file);
+
+                                        // Tampilkan nama file di bawah gambar
+                                        fileNameDisplay.textContent = file.name;
+                                    } else {
+                                        previewImg.src = 'https://images.pexels.com/photos/2690323/pexels-photo-2690323.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
+                                        fileNameDisplay.textContent = '';
+                                    }
+                                }
+                            </script>
+
+
+
+                            <div class="items-center mt-8 sm:mt-14 text-[#202142]">
+
+                                <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                                    <div class="w-full">
+                                        <label for="first_name" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                                            Username</label>
+                                        <input type="text" value="{{ $driver->name }}" id="first_name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Username Driver" required>
+                                    </div>
+
+                                    <div class="w-full">
+                                        <label for="password" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                                            Password</label>
+                                        <input type="password" id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Password Akun">
+                                    </div>
+
+                                </div>
+
+                                <div class="mb-2 sm:mb-6">
+                                    <label for="email" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Email</label>
+                                    <input type="email" value="{{ $driver->email }}" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Email Akun" required>
+                                </div>
+
+                                <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                                    <div class="w-full">
+                                        <label for="no_hp" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Nomor Telepon</label>
+                                        <input type="number" value="{{ $driver->no_hp }}" id="no_hp" name="no_hp" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Nomor Telepon Driver">
+                                    </div>
+
+                                    <div class="w-full">
+                                        <label for="address" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Alamat</label>
+                                        <input type="text" value="{{ $driver->address }}" id="address" name="address" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Alamat Driver">
+                                    </div>
+
+                                </div>
+                                <hr class="mt-8 border-gray-300 dark:border-gray-700">
+                                <button class="w-full mt-8 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#1E293B] text-white hover:rounded-3xl duration-300 focus:outline-none focus:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none">Ubah</button>
+                            </div>
                         </div>
-                        <p class="translate-x-3">Kembali</p>
-                    </button>
-                </a>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="bg-white shadow-md rounded-b-lg p-6 dark:bg-gray-800">
-            <form action="{{ route('driver.update', $driver->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="text" name="name" value="{{ $driver->name }}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                    <label for="floating_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama</label>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="email" name="email" value="{{ $driver->email }}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                    <label for="floating_size" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="password" name="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                    <label for="floating_size" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-                </div>
-                <div class="grid md:grid-cols-2 md:gap-6">
-                    <div class="relative z-0 w-full mb-5 group">
-                        <input type="text" name="address" value="{{ $driver->address }}" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                        <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Alamat</label>
-                    </div>
-                    <div class="relative z-0 w-full mb-5 group">
-                        <input type="number" name="no_hp" value="{{ $driver->no_hp }}" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                        <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nomor Telepon</label>
-                    </div>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Profil Lama : </label>
-                    <button type="button" data-modal-target="avatar-{{ $driver->id }}" data-modal-toggle="avatar-{{ $driver->id }}" class="block mb-3 transition-colors duration-200 text-white w-full bg-blue-800 hover:bg-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                        LIHAT GAMBAR
-                    </button>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <label for="file_input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Masukkan Foto Profil Baru : </label>
-                    <input id="file_input" name="avatar" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help">
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG, atau GIF (MAX. 800x400px).</p>
-                </div>
-                <button class="w-full font-semibold uppercase transition-colors duration-200 text-white bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded-lg">UBAH</button>
-            </form>
-            <!-- Main Modal -->
-            <div id="avatar-{{ $driver->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                <div class="relative p-4 w-full max-w-2xl max-h-full">
-                    <!-- Modal Content -->
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <!-- Modal Header -->
-                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t bg-blue-900 dark:border-gray-600">
-                            <h3 class="text-xl font-semibold uppercase text-white shadow-xl dark:text-white">
-                                Foto Profil Akun {{ $driver->name }}
-                            </h3>
-                            <button type="button" class="text-gray-400 transition-colors duration-200 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="avatar-{{ $driver->id }}">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                            </button>
-                        </div>
-                        <!-- Modal Body -->
-                        <div class="p-4 md:p-5 space-y-4">
-                            <img src="{{ asset('uploads/avatar/' . $driver->avatar) }}" alt="" width="100%">
-                        </div>
-                        <!-- Modal Footer -->
-                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                            <button data-modal-hide="avatar-{{ $driver->id }}" type="button" class="text-white w-full transition-colors duration-200 bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tutup</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
-    @extends('layouts.partial.script')
 @endsection
