@@ -242,7 +242,7 @@
                                         <input type="hidden" name="transaction_status" value="accepted">
                                         <button type="submit">
                                             <span class="inline-flex items-center rounded-full bg-green-300 hover:bg-green-400 transition-colors duration-300 px-6 py-2 text-sm font-semibold text-[#1E293B]">
-                                                Kirim
+                                                Terima
                                             </span>
                                         </button>
                                     </form>
@@ -281,9 +281,6 @@
                             @endif
 
                             @if ($see->transaction_status == 'pending' && is_null($see->delivery_status))
-                                <span class="inline-flex items-center rounded-full bg-gray-300 hover:bg-gray-400 transition-colors duration-300 px-6 py-2 text-sm font-semibold text-[#1E293B]">
-                                    Belum Dikirim
-                                </span>
                             @endif
 
                             @if ($see->transaction_status == 'accepted' && $see->delivery_status == 'pending')

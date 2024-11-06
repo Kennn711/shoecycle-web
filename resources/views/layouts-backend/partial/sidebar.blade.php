@@ -28,38 +28,60 @@
     </div>
     <!-- MAX SIDEBAR-->
     <div class= "max hidden text-white mt-20 flex-col space-y-2 w-full h-[calc(100vh)]">
-        <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-            <i class="fi-br-dashboard-panel w-4 h-5"></i>
-            <div>
-                <a href="{{ route('page.dashboard') }}">
-                    Dashboard
-                </a>
+        @if (auth()->user()->role == 'admin')
+            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+                <i class="fi-br-dashboard-panel w-4 h-5"></i>
+                <div>
+                    <a href="{{ route('page.dashboard') }}">
+                        Dashboard
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-            <i class="fi-br-boot-heeled w-4 h-5"></i>
-            <div>
-                <a href="{{ route('shoes.index') }}">
-                    Data Sepatu
-                </a>
+            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+                <i class="fi-br-boot-heeled w-4 h-5"></i>
+                <div>
+                    <a href="{{ route('shoes.index') }}">
+                        Data Sepatu
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-            <i class="bi bi-receipt w-4 h-5"></i>
-            <div>
-                <a href="{{ route('transaction.index') }}">
-                    Data Transaksi
-                </a>
+            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+                <i class="bi bi-receipt w-4 h-5"></i>
+                <div>
+                    <a href="{{ route('transaction.index') }}">
+                        Data Transaksi
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-            <i class="fi-br-employee-man w-4 h-5"></i>
-            <div>
-                <a href="{{ route('driver.index') }}">
-                    Kelola Driver
-                </a>
+            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+                <i class="fi-br-employee-man w-4 h-5"></i>
+                <div>
+                    <a href="{{ route('driver.index') }}">
+                        Kelola Driver
+                    </a>
+                </div>
             </div>
-        </div>
+        @endif
+
+        @if (auth()->user()->role == 'driver')
+            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+                <i class="fi-br-employee-man w-4 h-5"></i>
+                <div>
+                    <a href="{{ route('ordershoes.view') }}">
+                        Daftar Pesanan
+                    </a>
+                </div>
+            </div>
+            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+                <i class="fi-br-employee-man w-4 h-5"></i>
+                <div>
+                    <a href="{{ route('myorder.view') }}">
+                        Pesanan Saya
+                    </a>
+                </div>
+            </div>
+        @endif
+
         <hr class="my-4 border-gray-400 mx-8">
         <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
             <i class="bi bi-box-arrow-left w-4 h-6"></i>
@@ -72,23 +94,34 @@
     </div>
     <!-- MINI SIDEBAR-->
     <div class= "mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
-        <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
-            <i class="fi-br-dashboard-panel w-4 h-2"></i>
-        </div>
-        <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
-            <i class="fi-br-boot-heeled w-4 h-2"></i>
-        </div>
-        <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
-            <i class="bi bi-receipt w-4 h-2"></i>
-        </div>
-        <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
-            <i class="fi-br-employee-man w-4 h-2"></i>
-        </div>
+        @if (auth()->user()->role == 'admin')
+            <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+                <i class="fi-br-dashboard-panel w-4 h-2"></i>
+            </div>
+            <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+                <i class="fi-br-boot-heeled w-4 h-2"></i>
+            </div>
+            <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+                <i class="bi bi-receipt w-4 h-2"></i>
+            </div>
+            <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+                <i class="fi-br-employee-man w-4 h-2"></i>
+            </div>
+        @endif
+
+        @if (auth()->user()->role == 'driver')
+            <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+                <i class="fi-br-dashboard-panel w-4 h-2"></i>
+            </div>
+            <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+                <i class="fi-br-boot-heeled w-4 h-2"></i>
+            </div>
+        @endif
+
         <hr class="mt-4 mx-2 border-gray-400">
         <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
             <i class="bi bi-box-arrow-left w-4 h-2"></i>
         </div>
-
     </div>
 
 </aside>
