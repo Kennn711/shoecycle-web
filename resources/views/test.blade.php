@@ -1,94 +1,155 @@
 @extends('layouts.main')
 
-@section('title', 'FORM EDIT DRIVER')
-@section('page_title', 'Data Driver')
+@section('title', 'Tabel Transaksi')
+@section('page_title', 'Data Transaksi')
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/datatable/flowbite.css') }}">
+@endpush
 
 @section('content')
-    <div class="w-1/2 mx-auto my-32">
-        <div class="shadow-md p-6 bg-blue-900 dark:bg-gray-800 rounded-t-lg">
-            <div class="flex justify-between items-center mb-1">
-                <h2 class="text-2xl font-bold mb-2 text-white uppercase dark:text-white">Form Edit Driver</h2>
-                <a href="{{ route('driver.index') }}" class="font-semibold text-2xl uppercase text-white px-4 py-1 rounded-lg">
-                    <button class="bg-white text-center w-32 rounded-2xl h-12 relative text-black text-xl font-semibold group" type="button">
-                        <div class="bg-green-400 rounded-xl h-10 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[120px] z-10 duration-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="25px" width="25px">
-                                <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" fill="#000000"></path>
-                                <path d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" fill="#000000"></path>
-                            </svg>
-                        </div>
-                        <p class="translate-x-3">Kembali</p>
-                    </button>
-                </a>
-            </div>
-        </div>
-        <div class="bg-white shadow-md rounded-b-lg p-6 dark:bg-gray-800">
-            <form action="{{ route('driver.update', $driver->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="text" name="name" value="{{ $driver->name }}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                    <label for="floating_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama</label>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="email" name="email" value="{{ $driver->email }}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                    <label for="floating_size" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="password" name="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                    <label for="floating_size" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-                </div>
-                <div class="grid md:grid-cols-2 md:gap-6">
-                    <div class="relative z-0 w-full mb-5 group">
-                        <input type="text" name="address" value="{{ $driver->address }}" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                        <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Alamat</label>
+    <div class="w-full pl-24 pr-8 py-6 mx-auto my-32">
+        <div class="flex flex-wrap -mx-3">
+            <div class="flex-none w-full max-w-full px-3">
+                <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white dark:bg-gray-800 border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                    <div class="flex bg-blue-900 items-center justify-center p-6 pb-6 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                        <h6 class="dark:text-white text-gray-100 text-xl uppercase font-mono font-bold">Data Transaksi yang Dilakukan</h6>
                     </div>
-                    <div class="relative z-0 w-full mb-5 group">
-                        <input type="number" name="no_hp" value="{{ $driver->no_hp }}" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                        <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nomor Telepon</label>
-                    </div>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Profil Lama : </label>
-                    <button type="button" data-modal-target="avatar-{{ $driver->id }}" data-modal-toggle="avatar-{{ $driver->id }}" class="block mb-3 transition-colors duration-200 text-white w-full bg-blue-800 hover:bg-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                        LIHAT GAMBAR
-                    </button>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <label for="file_input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Masukkan Foto Profil Baru : </label>
-                    <input id="file_input" name="avatar" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help">
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG, atau GIF (MAX. 800x400px).</p>
-                </div>
-                <button class="w-full font-semibold uppercase transition-colors duration-200 text-white bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded-lg">UBAH</button>
-            </form>
-            <!-- Main Modal -->
-            <div id="avatar-{{ $driver->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                <div class="relative p-4 w-full max-w-2xl max-h-full">
-                    <!-- Modal Content -->
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <!-- Modal Header -->
-                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t bg-blue-900 dark:border-gray-600">
-                            <h3 class="text-xl font-semibold uppercase text-white shadow-xl dark:text-white">
-                                Foto Profil Akun {{ $driver->name }}
-                            </h3>
-                            <button type="button" class="text-gray-400 transition-colors duration-200 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="avatar-{{ $driver->id }}">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                            </button>
-                        </div>
-                        <!-- Modal Body -->
-                        <div class="p-4 md:p-5 space-y-4">
-                            <img src="{{ asset('uploads/avatar/' . $driver->avatar) }}" alt="" width="100%">
-                        </div>
-                        <!-- Modal Footer -->
-                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                            <button data-modal-hide="avatar-{{ $driver->id }}" type="button" class="text-white w-full transition-colors duration-200 bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tutup</button>
+                    <div class="flex-auto px-2 pt-0 pb-3">
+                        <div class="p-0 overflow-x-auto">
+                            <table class="items-center w-full mb-0 align-center border-collapse dark:border-white/40 text-slate-500">
+                                <thead class="align-bottom">
+                                    <tr>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">NO</th>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">NAMA CUSTOMER</th>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">BUKTI PEMBAYARAN</th>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">TANGGAL PEMBELIAN</th>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">TANGGAL DITERIMA</th>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">TOTAL</th>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">KODE RESI</th>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">DETAIL</th>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">STATUS TRANSAKSI</th>
+                                        <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">STATUS PENGIRIMAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($transactions as $see)
+                                        <tr>
+                                            <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <div class="py-1">
+                                                    <h6 class="mb-0 text-sm text-center leading-normal dark:text-white">{{ $loop->iteration }}</h6>
+                                                </div>
+                                            </td>
+                                            <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">{{ $see->user->name }}</p>
+                                            </td>
+                                            <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                @php $modalId = "modal-" . $see->id; @endphp
+                                                <button data-modal-target="{{ $modalId }}" data-modal-toggle="{{ $modalId }}" class=" text-white transition-colors duration-200 bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-duration-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                                    LIHAT GAMBAR
+                                                </button>
+
+                                                <div id="{{ $modalId }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                                                        <div class="relative rounded-lg shadow dark:bg-gray-700">
+                                                            <div class="flex items-center justify-between p-4 md:p-5 border-blue-950 rounded-t shadow-xl bg-blue-900 dark:border-gray-600">
+                                                                <h3 class="text-xl font-semibold uppercase text-white dark:text-white">Bukti Pembayaran</h3>
+                                                            </div>
+                                                            <div class="p-4 md:p-5 space-y-4 bg-white">
+                                                                <img src="{{ asset('uploads/payment/' . $see->proof_of_payment) }}" width="100%">
+                                                            </div>
+                                                            <div class="flex items-center p-4 md:p-5 border-t bg-white border-gray-200 rounded-b dark:border-gray-600">
+                                                                <button data-modal-hide="{{ $modalId }}" type="button" class="h-12 text-white w-full transition-colors duration-200 bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-duration-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600">TUTUP</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <span class="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">{{ $see->payment_date }}</span>
+                                            </td>
+                                            <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <span class="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">{{ $see->received_date }}</span>
+                                            </td>
+                                            <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <span class="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">Rp {{ number_format($see->total, 0, ',', '.') }}</span>
+                                            </td>
+                                            <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <span class="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">{{ $see->code }}</span>
+                                            </td>
+                                            <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                @php $modalDetailId = "modaldetail-" . $see->id; @endphp
+                                                <button data-modal-target="{{ $modalDetailId }}" data-modal-toggle="{{ $modalDetailId }}" class=" text-white transition-colors duration-200 bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-duration-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                                    LIHAT DETAIL
+                                                </button>
+
+                                                <div id="{{ $modalDetailId }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t bg-blue-900 shadow-xl dark:border-gray-600">
+                                                                <h3 class="text-xl font-semibold text-white uppercase dark:text-white">Detail Pesanan {{ $see->code }}</h3>
+                                                            </div>
+                                                            <div class="p-4 md:p-5 space-y-4">
+
+                                                            </div>
+                                                            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                                <button data-modal-hide="{{ $modalDetailId }}" type="button" class="h-12 text-white w-full transition-colors duration-200 bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-duration-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600">TUTUP</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                @if ($see->transaction_status == 'accepted')
+                                                    <button disabled class="text-sm w-40 font-semibold bg-yellow-300 uppercase text-white px-5 py-2.5 rounded-lg">DIPROSES</button>
+                                                @endif
+
+                                                @if ($see->transaction_status == 'pending')
+                                                    <form action="{{ route('transaction.status', $see->id) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        <input type="hidden" name="transaction_status" value="accepted">
+                                                        <button type="submit" class="text-sm font-semibold uppercase bg-green-700 text-white px-5 py-2.5 rounded-lg">TERIMA</button>
+                                                    </form>
+                                                    <form action="{{ route('transaction.status', $see->id) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        <input type="hidden" name="transaction_status" value="cancelled">
+                                                        <button type="submit" class="text-sm font-semibold uppercase bg-red-700 text-white px-5 py-2.5 rounded-lg">TOLAK</button>
+                                                    </form>
+                                                @endif
+
+                                                @if ($see->transaction_status == 'completed')
+                                                    <button disabled class="text-sm w-40 font-semibold bg-green-700 uppercase text-white px-5 py-2.5 rounded-lg">SELESAI</button>
+                                                @endif
+
+                                                @if ($see->transaction_status == 'cancelled')
+                                                    <button disabled class="text-sm font-semibold uppercase bg-red-700 w-40 text-white px-5 py-2.5 rounded-lg">DIBATALKAN</button>
+                                                @endif
+                                            </td>
+                                            @if ($see->transaction_status == 'cancelled' && is_null($see->delivery_status))
+                                                <td class="text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"></td>
+                                            @endif
+                                            @if ($see->delivery_status == 'pending' && is_null($see->delivery_status))
+                                                <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                    <button disabled class="text-xs w-40 font-semibold bg-gray-400 uppercase text-white px-5 py-2.5 rounded-lg">PENDING</button>
+                                                </td>
+                                            @endif
+                                            @if ($see->transaction_status == 'completed')
+                                                <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                    <button disabled class="text-sm font-semibold uppercase bg-green-700 text-white px-5 py-2.5 rounded-lg">TERKIRIM</button>
+                                                </td>
+                                            @endif
+                                            @if ($see->delivery_status == 'shipped')
+                                                <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                    <button disabled class="text-sm font-semibold uppercase bg-yellow-300 text-white px-5 py-2.5 rounded-lg">DIKIRIM <i class="bi bi-truck text-sm"></i></button>
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @extends('layouts.partial.script')
 @endsection
