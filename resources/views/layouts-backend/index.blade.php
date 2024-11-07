@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="{{ asset('assets/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/uicons-bold-rounded/css/uicons-bold-rounded.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('assets/sweetalert/sweetalert.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('assets/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css') }}">
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -30,6 +31,37 @@
     <!-- CONTENT END-->
 
     @include('layouts-backend/partial/script')
+
+    <script src="{{ asset('assets/sweetalert/sweetalert.min.js') }}"></script>
+
+    @if ($errors->any())
+        <script>
+            Swal.fire({
+                position: "top",
+                icon: "error",
+                title: "Ooppss, Ada yang Salah",
+                showConfirmButton: false,
+                toast: true,
+                timer: 2000,
+                timerProgressBar: true,
+            });
+        </script>
+    @endif
+
+    @if (session('message'))
+        <script>
+            Swal.fire({
+                position: "top",
+                icon: "{{ session('type-message') }}",
+                title: "{!! session('message') !!}",
+                showConfirmButton: false,
+                toast: true,
+                timer: 2000,
+                timerProgressBar: true,
+            });
+        </script>
+    @endif
+
     <script src="{{ asset('assets/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets/OwlCarousel2-2.3.4/dist/owl.carousel.min.js') }}"></script>
     <script>

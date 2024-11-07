@@ -81,16 +81,6 @@
                 </div>
             </div>
         @endif
-
-        <hr class="my-4 border-gray-400 mx-8">
-        <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-            <i class="bi bi-box-arrow-left w-4 h-6"></i>
-            <div>
-                <a href="{{ route('auth.logout') }}">
-                    Keluar
-                </a>
-            </div>
-        </div>
     </div>
     <!-- MINI SIDEBAR-->
     <div class= "mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
@@ -117,11 +107,6 @@
                 <i class="fi-br-boot-heeled w-4 h-2"></i>
             </div>
         @endif
-
-        <hr class="mt-4 mx-2 border-gray-400">
-        <div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
-            <i class="bi bi-box-arrow-left w-4 h-2"></i>
-        </div>
     </div>
 
 </aside>

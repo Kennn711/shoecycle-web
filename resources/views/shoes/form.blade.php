@@ -26,24 +26,24 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                             <div>
                                 <label for="name" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Nama Sepatu</label>
-                                <input type="text" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required>
+                                <input type="text" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                             </div>
 
                             <div>
                                 <label for="size" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Ukuran</label>
-                                <input type="number" name="size" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required>
+                                <input type="number" name="size" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                             </div>
                         </div>
 
                         <div>
                             <label for="price" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Harga</label>
-                            <input type="number" name="price" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required>
+                            <input type="number" name="price" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                             <div>
                                 <label for="stock" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Stok</label>
-                                <input type="number" name="stock" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required>
+                                <input type="number" name="stock" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                             </div>
 
                             <div class="flex items-end justify-center">
@@ -57,7 +57,7 @@
 
                         <div>
                             <label for="description" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Deskripsi</label>
-                            <textarea style="resize: none" name="description" rows="5" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required></textarea>
+                            <textarea style="resize: none" name="description" rows="5" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"></textarea>
                         </div>
                     </div>
 

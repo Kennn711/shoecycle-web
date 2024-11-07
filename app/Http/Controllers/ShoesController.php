@@ -62,8 +62,12 @@ class ShoesController extends Controller
             }
         }
 
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Tambah Buku <b>$request->name</b>",
+        ];
 
-        return redirect()->route("shoes.index");
+        return redirect()->route("shoes.index")->with($message);
     }
 
     /**
