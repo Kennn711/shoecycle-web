@@ -13,8 +13,7 @@ class DriverController extends Controller
     public function index()
     {
         return view("driver.data", [
-            // Menampilkan data dari table user dengan role driver
-            "driver" => User::where("role", "driver")->get()
+            "driver" => User::where("role", "driver")->orderBy("name", "asc")->get()
         ]);
     }
 
@@ -48,17 +47,21 @@ class DriverController extends Controller
         // Mengset level sebagai driver
         $validation['role'] = "driver";
 
-        // Jika ada avatar / foto profil yang di upload
         if ($request->hasFile('avatar')) {
             $file_name = $request->file('avatar')->getClientOriginalName();
             $request->file('avatar')->move(public_path('uploads/avatar/'), $file_name);
             $validation['avatar'] = $file_name;
         }
 
-        // Menyimpan data ke dalam table users
         User::create($validation);
 
-        return redirect()->route("driver.index");
+        // Sweetalert
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Tambah Akun Driver : <br> <b>$request->name</b>"
+        ];
+
+        return redirect()->route("driver.index")->with($message);
     }
 
     /**
@@ -100,10 +103,8 @@ class DriverController extends Controller
             $validation['password'] = bcrypt($request->password);
         }
 
-        // Temukan sepatu berdasarkan id
         $driver = User::find($id);
 
-        // Cek apakah ada file avatar baru yang diupload
         if ($request->hasFile('avatar')) {
             // Jika Mengupload / Mengubah Foto Profil, maka hapus yang lama
             if ($driver->avatar) {
@@ -119,10 +120,15 @@ class DriverController extends Controller
             $validation['avatar'] = $file_name;
         }
 
-        // Update Akun Driver
         $driver->update($validation);
 
-        return redirect()->route("driver.index");
+        // Sweetalert
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Edit Akun Driver : <br> <b>$request->name</b>"
+        ];
+
+        return redirect()->route("driver.index")->with($message);
     }
 
     /**
@@ -131,9 +137,15 @@ class DriverController extends Controller
     public function destroy(string $id)
     {
         $driver = User::find($id);
+        $driverName = $driver->name;
 
         $driver->delete();
 
-        return redirect()->route("driver.index");
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Hapus Akun Driver : <br> <b>{$driverName}</b>"
+        ];
+
+        return redirect()->route("driver.index")->with($message);
     }
 }

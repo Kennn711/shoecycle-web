@@ -42,7 +42,7 @@
                 title: "Ooppss, Ada yang Salah",
                 showConfirmButton: false,
                 toast: true,
-                timer: 2000,
+                timer: 2500,
                 timerProgressBar: true,
             });
         </script>
@@ -56,11 +56,50 @@
                 title: "{!! session('message') !!}",
                 showConfirmButton: false,
                 toast: true,
-                timer: 2000,
+                timer: 2500,
                 timerProgressBar: true,
             });
         </script>
     @endif
+
+    <script>
+        function confirmDeleteShoes(id, name) {
+            Swal.fire({
+                title: 'Apakah Anda Yakin ?',
+                text: "Anda Akan Menghapus Sepatu : " + name,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#FFCC00',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-shoes-' + id).submit();
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function confirmDeleteDriver(id, name) {
+            Swal.fire({
+                title: 'Apakah Anda Yakin ?',
+                text: "Anda Akan Menghapus Akun : " + name,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#FFCC00',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-driver-' + id).submit();
+                }
+            });
+        }
+    </script>
+
 
     <script src="{{ asset('assets/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets/OwlCarousel2-2.3.4/dist/owl.carousel.min.js') }}"></script>

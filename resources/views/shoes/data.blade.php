@@ -66,7 +66,7 @@
                                                 </h3>
                                             </div>
                                             <!-- Modal body -->
-                                            <div class="owl-carousel owl-theme bg-gray-100 p-4 md:p-5 space-y-4">
+                                            <div class=" bg-gray-100 p-4 md:p-5 space-y-4">
                                                 <h2>{{ $see->description }}</h2>
                                             </div>
                                             <!-- Modal footer -->
@@ -132,10 +132,10 @@
                                         </button>
                                     </a>
 
-                                    <form action="{{ route('shoes.destroy', $see->id) }}" method="POST">
+                                    <form id="delete-shoes-{{ $see->id }}" action="{{ route('shoes.destroy', $see->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="px-3.5 py-2 bg-red-600 rounded-md hover:rounded-xl hover:bg-red-700 transition-all duration-300 text-white">
+                                        <button type="button" onclick="confirmDeleteShoes({{ $see->id }}, '{{ $see->name }}')" class="px-3.5 py-2 bg-red-600 rounded-md hover:rounded-xl hover:bg-red-700 transition-all duration-300 text-white">
                                             <i class="bi bi-trash-fill text-xl text-white"></i>
                                         </button>
                                     </form>

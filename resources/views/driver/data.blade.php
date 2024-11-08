@@ -64,10 +64,10 @@
                                     </button>
                                 </a>
 
-                                <form action="{{ route('driver.destroy', $see->id) }}" method="POST">
+                                <form id="delete-driver-{{ $see->id }}" action="{{ route('driver.destroy', $see->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="px-3.5 py-2 bg-red-600 rounded-md hover:rounded-xl hover:bg-red-700 transition-all duration-300 text-white">
+                                    <button type="button" onclick="confirmDeleteDriver({{ $see->id }}, '{{ $see->email }}')" class="px-3.5 py-2 bg-red-600 rounded-md hover:rounded-xl hover:bg-red-700 transition-all duration-300 text-white">
                                         <i class="bi bi-trash-fill text-xl text-white"></i>
                                     </button>
                                 </form>

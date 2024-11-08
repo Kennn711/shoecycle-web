@@ -65,7 +65,7 @@
                                     <div class="w-full">
                                         <label for="first_name" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
                                             Username</label>
-                                        <input type="text" value="{{ $driver->name }}" id="first_name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Username Driver" required>
+                                        <input type="text" value="{{ $driver->name }}" id="first_name" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Username Driver">
                                     </div>
 
                                     <div class="w-full">
@@ -78,7 +78,7 @@
 
                                 <div class="mb-2 sm:mb-6">
                                     <label for="email" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Email</label>
-                                    <input type="email" value="{{ $driver->email }}" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Email Akun" required>
+                                    <input type="email" value="{{ $driver->email }}" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Masukkan Email Akun">
                                 </div>
 
                                 <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">

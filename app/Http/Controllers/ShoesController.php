@@ -14,7 +14,7 @@ class ShoesController extends Controller
     public function index()
     {
         return view("shoes.data", [
-            "shoes" => Shoes::with('imagedetail')->get()
+            "shoes" => Shoes::with('imagedetail')->orderBy('name', 'asc')->get()
         ]);
     }
 
@@ -64,7 +64,7 @@ class ShoesController extends Controller
 
         $message = [
             "type-message" => "success",
-            "message" => "Berhasil Tambah Buku <b>$request->name</b>",
+            "message" => "Berhasil Tambah Sepatu : <br> <b>$request->name</b>",
         ];
 
         return redirect()->route("shoes.index")->with($message);
@@ -95,8 +95,6 @@ class ShoesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // dd($request->all());
-
         $validation = $request->validate([
             "name" => "required",
             "size" => "required",
@@ -136,7 +134,12 @@ class ShoesController extends Controller
         // Update Data Sepatu
         $shoes->update($validation);
 
-        return redirect()->route("shoes.index");
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Edit Sepatu : <br> <b>$request->name</b>"
+        ];
+
+        return redirect()->route("shoes.index")->with($message);
     }
 
     /**
@@ -145,6 +148,7 @@ class ShoesController extends Controller
     public function destroy(string $id)
     {
         $shoes = Shoes::find($id);
+        $shoesName = $shoes->name;
 
         if (!$shoes) {
             return redirect()->route("shoes.index");
@@ -167,7 +171,12 @@ class ShoesController extends Controller
 
         $shoes->delete();
 
-        return redirect()->route("shoes.index");
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Menghapus Sepatu : <br> <b>{$shoesName}</b>"
+        ];
+
+        return redirect()->route("shoes.index")->with($message);
     }
 
     // Function menampilkan id sepatu ke view pesanan (POV Customer)

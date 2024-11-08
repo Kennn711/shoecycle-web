@@ -46,8 +46,8 @@
                     </form>
                 </div>
 
-                <div class="md:h-full bg-[#000842] rounded-xl lg:p-12 p-8">
-                    <img src="https://readymadeui.com/signin-image.webp" class="w-full h-full object-contain" alt="login-image" />
+                <div class="md:h-full bg-[#0F172A] rounded-xl lg:p-12 p-8">
+                    <img src="{{ asset('uploads/ilustration/login-amico.png') }}" class="w-full h-full object-contain" alt="login-image" />
                 </div>
             </div>
         </div>

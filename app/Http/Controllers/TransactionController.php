@@ -13,7 +13,15 @@ class TransactionController extends Controller
 {
     function index()
     {
-        $transactions = Transaction::with(['transactiondetails', 'user', 'driver'])->get();
+        $transactions = Transaction::with(['transactiondetails', 'user', 'driver'])->orderByRaw("
+        CASE
+            WHEN transaction_status = 'pending' THEN 1
+            WHEN transaction_status = 'accepted' THEN 2
+            WHEN transaction_status = 'completed' THEN 3
+            WHEN transaction_status = 'cancelled' THEN 4
+            ELSE 5
+        END
+        ")->get();
         return view("transaction.transaction", [
             'transactions' => $transactions,
         ]);
@@ -169,15 +177,20 @@ class TransactionController extends Controller
 
         if ($transaction->delivery_status == 'shipped') {
             $transaction->save();
+            return redirect()->route("myorder.view");
         }
 
         if ($transaction->delivery_status == 'delivered') {
             $transaction->transaction_status = 'completed';
             $transaction->received_date = now();
             $transaction->save();
-        }
 
-        return redirect()->route("myorder.view");
+            $message = [
+                "type-message" => "success",
+                "message" => "Pesanan <b>$transaction->code</b> Terkirim"
+            ];
+            return redirect()->route("myorder.view")->with($message);
+        }
     }
 
     // Driver
@@ -189,10 +202,17 @@ class TransactionController extends Controller
         ]);
     }
 
-    function myOrder() // View Pesanan Saya (Driver)
+    function myOrder() // View Daftar Pesanan (Driver)
     {
         $driverId = Auth::id(); // Id driver yang sedang login
-        $myOrders = Transaction::where('driver_id', $driverId)->get();
+        $myOrders = Transaction::where('driver_id', $driverId)->orderByRaw("
+        CASE
+            WHEN delivery_status = 'pending' THEN 1
+            WHEN delivery_status = 'shipped' THEN 2
+            WHEN delivery_status = 'delivered' THEN 3
+            ELSE 4
+        END
+        ")->get();
 
         return view("page.myorder", compact('myOrders'));
     }
@@ -215,6 +235,11 @@ class TransactionController extends Controller
             }
         }
 
-        return redirect()->route('myorder.view');
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Tambah Pesanan <br> <b>$transaction->code</b>"
+        ];
+
+        return redirect()->route('myorder.view')->with($message);
     }
 }
