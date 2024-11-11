@@ -36,13 +36,18 @@ class SessionController extends Controller
 
             $user = Auth::user();
 
+            $message = [
+                "type-message" => "success",
+                "message" => "Selamat Datang, <b>$user->name</b>"
+            ];
+
             // Logika login multi role
             if ($user->role === 'admin') {
-                return redirect()->intended('dashboard');
+                return redirect()->intended('dashboard')->with($message);
             } else if ($user->role === 'customer') {
-                return redirect()->intended('order');
+                return redirect()->intended('order')->with($message);
             } else if ($user->role === 'driver') {
-                return redirect()->intended('ordershoes');
+                return redirect()->intended('ordershoes')->with($message);
             } else {
                 return redirect()->route('login.view');
             }
@@ -71,9 +76,16 @@ class SessionController extends Controller
 
     function logout()
     {
+        $user = Auth::user();
+
         Auth::logout();
 
-        return redirect()->route("login");
+        $message = [
+            "type-message" => "success",
+            "message" => "Sampai Jumpa lagi, <b>$user->name</b>"
+        ];
+
+        return redirect()->route("login")->with($message);
     }
 
 

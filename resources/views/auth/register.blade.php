@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
+    <title>ShoeCycle | Register</title>
+    <link rel="stylesheet" href="{{ asset('assets/sweetalert/sweetalert.min.css') }}">
     @vite('resources/css/app.css')
 </head>
 
@@ -82,6 +83,20 @@
         </div>
     </div>
 
+    <script src="{{ asset('assets/sweetalert/sweetalert.min.js') }}"></script>
+    @if (session('message'))
+        <script>
+            Swal.fire({
+                position: "top",
+                icon: "{{ session('type-message') }}",
+                title: "{!! session('message') !!}",
+                showConfirmButton: false,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+            });
+        </script>
+    @endif
 </body>
 
 </html>

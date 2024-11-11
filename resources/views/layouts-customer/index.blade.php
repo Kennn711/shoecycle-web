@@ -35,6 +35,20 @@
     @include('layouts-customer/partial/footer')
     <!--! icons -->
     <script src="{{ asset('assets/sweetalert/sweetalert.min.js') }}"></script>
+    @if (session('message'))
+        <script>
+            Swal.fire({
+                position: "top",
+                icon: "{{ session('type-message') }}",
+                title: "{!! session('message') !!}",
+                showConfirmButton: false,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+            });
+        </script>
+    @endif
+
     <!--!javascript file  -->
     <script type="module" src="{{ asset('eCommerce_tailwind_template-master') }}/assets/index.js"></script>
 </body>
