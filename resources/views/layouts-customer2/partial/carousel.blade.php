@@ -93,3 +93,76 @@
         <button id="next" class="w-10 h-10 rounded-full font-mono text-lg font-bold border bg-white border-gray-500 mb-[350px]">&gt;</button>
     </div>
 </div>
+
+
+<style>
+    .carousel .item {
+        opacity: 0;
+        transform: scale(0.8);
+        filter: blur(20px);
+        z-index: 0;
+    }
+
+    .carousel .item.active {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+        z-index: 20;
+    }
+
+    .carousel .item.next {
+        opacity: 0;
+        transform: scale(0.9);
+        filter: blur(10px);
+        z-index: 10;
+    }
+
+    .carousel .item.prev {
+        opacity: 0;
+        transform: scale(0.9);
+        filter: blur(10px);
+        z-index: 10;
+    }
+</style>
+
+<script>
+    const items = document.querySelectorAll('.carousel .item');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        items.forEach((item, index) => {
+            item.classList.remove('active', 'next', 'prev');
+            if (index === currentIndex) {
+                item.classList.add('active');
+                resetAnimation(item); // Menambahkan fungsi untuk reset animasi
+            } else if (index === (currentIndex + 1) % items.length) {
+                item.classList.add('next');
+            } else if (index === (currentIndex - 1 + items.length) % items.length) {
+                item.classList.add('prev');
+            }
+        });
+    }
+
+    // Fungsi untuk reset animasi
+    function resetAnimation(item) {
+        const introContent = item.querySelector('#intro');
+        if (introContent) {
+            introContent.classList.remove('animate-show-content');
+            void introContent.offsetWidth; // Trik untuk memaksa browser reflow
+            introContent.classList.add('animate-show-content');
+        }
+    }
+
+    document.getElementById('next').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % items.length;
+        updateCarousel();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateCarousel();
+    });
+
+    // Initial update
+    updateCarousel();
+</script>
