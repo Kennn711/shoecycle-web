@@ -5,12 +5,15 @@
 @section('breadcumb-title', 'Data Transaksi')
 
 @section('backend-content')
-    <div class="flex justify-start">
+    <div class="flex justify-between mt-3 mx-24">
         <div>
-            <h1 class="text-2xl font-semibold ml-24 mt-3">Tabel Transaksi</h1>
+            <h1 class="text-2xl font-semibold">Tabel Sepatu</h1>
+        </div>
+        <div>
+            <input type="text" id="search" placeholder="Cari Data Transaksi..." class="border px-3 py-2 mr-6 border-slate-400 transition-all duration-300 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
         </div>
     </div>
-    <div class="overflow-hidden rounded-3xl border border-gray-200 shadow-md mt-6 mb-5 ml-20 mr-20">
+    <div class="overflow-hidden rounded-3xl border border-gray-200 shadow-md mt-4 mb-5 ml-20 mr-20">
         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead class="bg-[#1E293B]">
                 <tr>
@@ -24,9 +27,9 @@
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Status Pengiriman</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+            <tbody id="transactionTable" class="divide-y divide-gray-100 border-t border-gray-100">
                 @foreach ($transactions as $see)
-                    <tr class="hover:bg-gray-100">
+                    <tr class="hover:bg-gray-100 transition-colors duration-200">
                         <td class="px-6 py-4">{{ $loop->iteration }}</td>
                         <td class="px-6 align-middle text-center py-4">{{ $see->user->name }}</td>
                         <td class="px-6 align-middle text-center py-4">
@@ -307,4 +310,16 @@
         </table>
     </div>
 
+    {{-- Searching --}}
+    <script src="{{ asset('assets/jquery/jquery.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#transactionTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 @endsection

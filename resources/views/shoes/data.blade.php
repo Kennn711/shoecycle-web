@@ -5,11 +5,12 @@
 @section('breadcumb-title', 'Data Sepatu')
 
 @section('backend-content')
-    <div class="flex justify-between">
-        <div>
-            <h1 class="text-2xl font-semibold ml-24 mt-3">Tabel Sepatu</h1>
+    <div class="flex justify-between mt-3">
+        <div class="ml-24">
+            <h1 class="text-2xl font-semibold">Tabel Sepatu</h1>
         </div>
         <div>
+            <input type="text" id="search" placeholder="Cari Sepatu..." class="border px-3 py-2 mr-6 border-slate-400 transition-all duration-300 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
             <a href="{{ route('shoes.create') }}">
                 <button class="rounded-md px-3.5 py-2 m-1 mr-24 overflow-hidden relative group cursor-pointer border-2 font-medium border-[#1E293B] text-[#1E293B] hover:text-white">
                     <span class="absolute w-64 h-0 transition-all duration-500 origin-center rotate-45 -translate-x-20 bg-[#1E293B] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
@@ -20,6 +21,7 @@
             </a>
         </div>
     </div>
+
     <div class="overflow-hidden rounded-3xl border border-gray-200 shadow-md mt-2 mb-5 ml-20 mr-20">
         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead class="bg-[#1E293B]">
@@ -34,9 +36,9 @@
                     <th scope="col" class="px-6 py-4 font-medium text-gray-50">Aksi</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+            <tbody id="shoesTable" class="divide-y divide-gray-100 border-t border-gray-100">
                 @foreach ($shoes as $see)
-                    <tr class="hover:bg-gray-100">
+                    <tr class="hover:bg-gray-100 transition-colors duration-300">
                         <td class="px-6 py-4">
                             {{ $loop->iteration }}
                         </td>
@@ -156,4 +158,16 @@
         </table>
     </div>
 
+    {{-- Searching --}}
+    <script src="{{ asset('assets/jquery/jquery.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#shoesTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 @endsection
