@@ -18,6 +18,8 @@ class CartController extends Controller
         // Mendapatkan keranjang dari session / buat keranjang kosong jika tidak ada
         $cart = session()->get('cart', []);
 
+        $shoesName = $shoes->name;
+
         // Jika sepatu yang ditambahkan sudah dikeranjang, tambahkan jumlah / stok nya saja
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] += $qty;
@@ -39,7 +41,12 @@ class CartController extends Controller
         // Menghitung Jumlah Pesanan di keranjang
         session()->put('count_cart', $countSession);
 
-        return redirect()->route("order.view");
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Menambahkan <b>{$shoesName}</b> ke <b>Keranjang</b>"
+        ];
+
+        return redirect()->route("order.view")->with($message);
     }
 
     public function viewCart()
@@ -55,6 +62,8 @@ class CartController extends Controller
         // Mengambil keranjang dari session
         $cart = session()->get('cart', []);
 
+        $shoesName = isset($cart[$id]) ? $cart[$id]['name'] : 'Sepatu tidak ditemukan';
+
         // Hapus item dari keranjang jika ada
         if (isset($cart[$id])) {
             unset($cart[$id]);
@@ -64,7 +73,13 @@ class CartController extends Controller
         $countSession = count($cart);
 
         session()->put('count_cart', $countSession);
-        return redirect()->back()->with('success', 'Sepatu berhasil dihapus dari keranjang');
+
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Menghapus <br> <b>{$shoesName}</b> dari <b>Keranjang</b>"
+        ];
+
+        return redirect()->back()->with($message);
     }
 
     public function clearCart()
@@ -73,6 +88,11 @@ class CartController extends Controller
         session()->forget('cart');
         session()->put('count_cart', 0);
 
-        return redirect()->back()->with('success', 'Keranjang berhasil dikosongkan');
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Mengkosongkan <b>Keranjang</b>"
+        ];
+
+        return redirect()->back()->with($message);
     }
 }

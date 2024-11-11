@@ -66,7 +66,12 @@ class SessionController extends Controller
 
         User::create($validation);
 
-        return redirect()->route("login");
+        $message = [
+            "type-message" => "success",
+            "message" => "Anda Berhasil Membuat Akun <br><b>Silahkan Login</b>"
+        ];
+
+        return redirect()->route("login")->with($message);
     }
 
     function dashboard()

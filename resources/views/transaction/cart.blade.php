@@ -30,10 +30,10 @@
                                         <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                                             <p class="text-base font-medium text-gray-900 dark:text-white">{{ $item['name'] }}</p>
                                             <div class="flex items-center gap-4">
-                                                <form action="{{ route('remove.cart', $id) }}" method="POST">
+                                                <form id="delete-cart-{{ $id }}" action="{{ route('remove.cart', $id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="inline-flex items-center text-base font-medium text-red-600 hover:underline dark:text-red-500">
+                                                    <button onclick="confirmDeleteCart({{ $id }}, '{{ $item['name'] }}')" type="button" class="inline-flex items-center text-base font-medium text-red-600 hover:underline dark:text-red-500">
                                                         <i class="bi bi-trash-fill"></i> Hapus
                                                     </button>
                                                 </form>
@@ -152,9 +152,9 @@
                                 <button class="flex w-full items-center justify-center rounded-lg bg-green-600 hover:bg-green-700 transition-colors duration-200 px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Kirim Bukti Pembayaran</button>
                             </form>
 
-                            <form action="{{ route('clear.cart') }}" method="POST">
+                            <form id="clear-cart" action="{{ route('clear.cart') }}" method="POST">
                                 @csrf
-                                <button class="flex w-full items-center justify-center rounded-lg bg-red-600 hover:bg-red-700 transition-colors duration-200 px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Kosongkan Keranjang</button>
+                                <button type="button" onclick="confirmClearCart()" class="flex w-full items-center justify-center rounded-lg bg-red-600 hover:bg-red-700 transition-colors duration-200 px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Kosongkan Keranjang</button>
                             </form>
                             <div class="flex items-center justify-center gap-2">
                                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> Atau </span>
