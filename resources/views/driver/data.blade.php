@@ -1,8 +1,15 @@
 @extends('layouts-backend/index')
 
 @section('backend-title', 'Admin | Kelola Driver')
-@section('breadcumb-role', 'Admin')
+@push('breadcumb-role')
+    {{ auth()->user()->role }}
+@endpush
+
 @section('breadcumb-title', 'Kelola Driver')
+
+@push('breadcumb-backend-role')
+    <i class="fi-br-admin w-6 h-6 text-xl"></i>
+@endpush
 
 @section('backend-content')
     <div class="flex justify-between mt-3">

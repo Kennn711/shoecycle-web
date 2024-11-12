@@ -1,8 +1,14 @@
 @extends('layouts-backend/index')
 
 @section('backend-title', 'Admin | Dashboard')
-@section('breadcumb-role', 'Admin')
+@push('breadcumb-role')
+    {{ auth()->user()->role }}
+@endpush
+
 @section('breadcumb-title', 'Dashboard')
+@push('breadcumb-backend-role')
+    <i class="fi-br-admin w-6 h-6 text-xl"></i>
+@endpush
 
 @section('backend-content')
     <div class="flex flex-wrap my-5 -mx-2">

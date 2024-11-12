@@ -1,8 +1,15 @@
 @extends('layouts-backend/index')
 
 @section('backend-title', 'Admin | Tambah Sepatu')
-@section('breadcumb-role', 'Admin')
+@push('breadcumb-role')
+    {{ auth()->user()->role }}
+@endpush
+
 @section('breadcumb-title', 'Data Sepatu')
+@push('breadcumb-backend-role')
+    <i class="fi-br-admin w-6 h-6 text-xl"></i>
+@endpush
+
 @push('breadcumb-sub-title')
     <svg class = "w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
@@ -26,24 +33,24 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                             <div>
                                 <label for="name" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Nama Sepatu</label>
-                                <input type="text" name="name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                <input type="text" name="name" class="py-3 px-4 transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                             </div>
 
                             <div>
                                 <label for="size" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Ukuran</label>
-                                <input type="number" name="size" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                <input type="number" name="size" class="py-3 px-4 transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                             </div>
                         </div>
 
                         <div>
                             <label for="price" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Harga</label>
-                            <input type="number" name="price" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                            <input type="number" name="price" class="py-3 px-4 transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                             <div>
                                 <label for="stock" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Stok</label>
-                                <input type="number" name="stock" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                <input type="number" name="stock" class="py-3 px-4 transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                             </div>
 
                             <div class="flex items-end justify-center">
@@ -57,7 +64,7 @@
 
                         <div>
                             <label for="description" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Deskripsi</label>
-                            <textarea style="resize: none" name="description" rows="5" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"></textarea>
+                            <textarea style="resize: none" name="description" rows="5" class="py-3 px-4 transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"></textarea>
                         </div>
                     </div>
 
@@ -72,7 +79,7 @@
                     <hr class="mt-8 border-gray-300 dark:border-gray-700">
 
                     <div class="mt-8 grid">
-                        <button class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#1E293B] text-white hover:rounded-3xl duration-300 focus:outline-none focus:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none">Tambah</button>
+                        <button class="w-full py-3 px-4 transition-all duration-300 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-3xl border border-transparent bg-[#1E293B] text-white hover:shadow-md hover:shadow-slate-600 focus:outline-none focus:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none">Tambah</button>
                     </div>
                 </form>
             </div>

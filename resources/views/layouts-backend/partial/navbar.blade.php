@@ -5,11 +5,11 @@
     <div class="grow h-full flex items-center justify-center"></div>
     <div class="flex-none h-full text-center flex items-center justify-center space-x-4">
         <div class="relative">
-            <button id="dropdownProfileButton" data-dropdown-toggle="dropdown" class="flex items-center justify-center bg-white focus:ring-4 focus:outline-none focus:ring-[#0F172A] transition-all duration-300 font-medium rounded-full text-sm p-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button id="dropdownProfileButton" data-dropdown-toggle="dropdown" class="flex items-center justify-center bg-white focus:ring-4 focus:outline-none focus:ring-[#0F172A] transition-all duration-300 font-medium rounded-full text-sm p-0.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 @if (!empty(auth()->user()->avatar))
-                    <img src="{{ asset('uploads/avatar/' . auth()->user()->avatar) }}" alt="Profile Picture" class="w-8 h-8 rounded-full">
+                    <img src="{{ asset('uploads/avatar/' . auth()->user()->avatar) }}" alt="Profile Picture" class="w-12 h-12 rounded-full">
                 @else
-                    <img src="{{ asset('uploads/avatar/empty-avatar.png') }}" alt="Profile Picture" class="w-8 h-8 rounded-full">
+                    <img src="{{ asset('uploads/avatar/empty-avatar.png') }}" alt="Profile Picture" class="w-12 h-12 rounded-full">
                 @endif
                 <p class="ml-3 text-base first-letter:uppercase">{{ auth()->user()->name }}</p>
                 <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">

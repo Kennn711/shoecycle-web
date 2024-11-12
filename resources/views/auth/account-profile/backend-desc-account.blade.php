@@ -1,8 +1,18 @@
 @extends('layouts-backend/index')
 
-@section('backend-title', 'Admin | Tabel Transaksi')
-@section('breadcumb-role', 'Admin')
-@section('breadcumb-title', 'Data Transaksi')
+@section('backend-title', 'Pengaturan Akun')
+@push('breadcumb-role')
+    {{ auth()->user()->role }}
+@endpush
+
+@push('breadcumb-backend-role')
+    @if (auth()->user()->role == 'driver')
+        <i class="fi-br-user-helmet-safety w-6 h-6 text-xl"></i>
+    @else
+        <i class="fi-br-admin w-6 h-6 text-xl"></i>
+    @endif
+@endpush
+@section('breadcumb-title', 'Pengaturan Akun')
 
 @section('backend-content')
     <div class=" py-1 bg-blueGray-50">
@@ -16,13 +26,19 @@
                     </div>
                 </div>
                 <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                    <form>
+                    <form action="{{ route('store.profile', $user->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
                         <h6 class="text-blueGray-400 text-sm mt-3 mb-0 font-bold uppercase">
                             Informasi Akun
                         </h6>
                         <div class="mx-auto w-64 text-center">
                             <div class="relative w-64 h-64 cursor-pointer mb-5" onclick="document.getElementById('avatar').click();">
-                                <img id="preview-img" name="avatar" class="w-64 h-64 rounded-full object-cover shadow-xl" src="" />
+                                @if (!empty($user->avatar))
+                                    <img id="preview-img" name="avatar" class="w-64 h-64 rounded-full object-cover shadow-xl" src="{{ asset('uploads/avatar/' . $user->avatar) }}" />
+                                @else
+                                    <img id="preview-img" name="avatar" class="w-64 h-64 rounded-full object-cover shadow-xl" src="{{ asset('uploads/avatar/empty-avatar.png') }}" />
+                                @endif
                                 <div class="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-full absolute top-0 left-0 flex justify-center items-center transition-all duration-500">
                                     <i class="bi bi-upload hidden group-hover:block w-12 text-4xl"></i>
                                 </div>
@@ -61,7 +77,7 @@
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                         Username
                                     </label>
-                                    <input type="text" name="name" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                    <input type="text" value="{{ $user->name }}" placeholder="Masukkan Username Anda" name="name" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                 </div>
                             </div>
                             <div class="w-full lg:w-6/12 px-4">
@@ -69,7 +85,7 @@
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                         Email
                                     </label>
-                                    <input type="email" name="email" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                    <input type="email" value="{{ $user->email }}" placeholder="Masukkan Email Anda" name="email" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                 </div>
                             </div>
                             <div class="w-full lg:w-12/12 px-4 mt-3">
@@ -93,7 +109,7 @@
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                         Alamat Lengkap
                                     </label>
-                                    <input type="text" name="address" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                    <input type="text" value="{{ $user->address }}" placeholder="Masukkan Alamat Anda" name="address" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                 </div>
                             </div>
                             <div class="w-full lg:w-6/12 px-4">
@@ -101,7 +117,7 @@
                                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                         Nomor Telepon
                                     </label>
-                                    <input type="email" name="no_hp" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                    <input type="number" value="{{ $user->no_hp }}" placeholder="Masukkan Nomor Telepon Anda" name="no_hp" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                 </div>
                             </div>
                         </div>

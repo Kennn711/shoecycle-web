@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class SessionController extends Controller
 {
@@ -98,7 +99,14 @@ class SessionController extends Controller
     function completeProfile()
     {
         $user = Auth::user();
-        return view('auth.account-profile.desc-account', compact('user'));
+
+        if ($user->role == 'admin' || $user->role == 'driver') {
+            return view('auth.account-profile.backend-desc-account', compact('user'));
+        }
+
+        if ($user->role == 'customer') {
+            return view('auth.account-profile.desc-account', compact('user'));
+        }
     }
 
     function storeProfile(Request $request)
@@ -108,8 +116,8 @@ class SessionController extends Controller
         $validation = $request->validate([
             'email'    => 'required',
             'name'     => 'required',
-            'no_hp'    => 'numeric',
-            'address'  => '',
+            'no_hp'    => 'nullable',
+            'address'  => 'nullable',
             'avatar'    => 'image|mimes:jpeg,png,jpg'
         ]);
 
@@ -135,14 +143,20 @@ class SessionController extends Controller
 
         $user->update($validation);
 
+        $userName = Auth::user();
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Mengupdate Akun <b>$userName->name</b>"
+        ];
+
         if (Auth::user()->role == 'customer') {
-            return redirect()->route('view.cart')->with('success', 'Berhasil Cuy');
+            return redirect()->route('view.cart')->with($message);
         }
         if (Auth::user()->role == 'admin') {
-            return redirect()->route('page.dashboard')->with('success', 'Berhasil Cuy');
+            return redirect()->route('page.dashboard')->with($message);
         }
         if (Auth::user()->role == 'driver') {
-            return redirect()->route('ordershoes.view')->with('success', 'Berhasil Cuy');
+            return redirect()->route('ordershoes.view')->with($message);
         }
     }
 }
