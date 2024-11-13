@@ -21,7 +21,7 @@
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownProfileButton">
                     <li class="flex items-center justify-between px-4 pb-2 hover:bg-gray-200 transition-colors duration-300 dark:hover:bg-gray-600 dark:hover:text-white">
                         <i class="bi bi-envelope-at-fill text-xl"></i>
-                        <p>{{ auth()->user()->email }}</p>
+                        <p class="ml-2 truncate">{{ auth()->user()->email }}</p>
                     </li>
                     <hr>
                     <li class="flex items-center px-4 hover:bg-gray-200 transition-colors duration-300 dark:hover:bg-gray-600 dark:hover:text-white">
