@@ -12,7 +12,6 @@
 
 @section('backend-content')
     @if ($transactions->where('transaction_status', 'accepted')->isNotEmpty())
-
         <form action="{{ route('add.to.myorder') }}" method="POST">
             @csrf
             <div class="flex justify-between">
@@ -218,8 +217,8 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal footer -->
-                                                            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                                                <button data-modal-hide="{{ $modalDetailId }}" type="button" class="w-full py-2.5 px-5 ms-3 text-sm font-medium text-white focus:outline-none bg-[#1E293B] rounded-lg border border-gray-200 hover:rounded-3xl duration-300 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">TUTUP</button>
+                                                            <div class="flex items-center justify-center p-4 md:p-5 border-t rounded-b dark:border-gray-600">
+                                                                <button data-modal-hide="{{ $modalDetailId }}" type="button" class="w-full py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-[#1E293B] rounded-3xl hover:shadow-md hover:shadow-slate-600 duration-300 focus:z-10 focus:ring-4 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">TUTUP</button>
                                                             </div>
                                                         </div>
                                                     </div>

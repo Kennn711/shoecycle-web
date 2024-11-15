@@ -32,7 +32,7 @@
     @include('layouts-customer/partial/header')
     @yield('content-frontend')
 
-    @include('layouts-customer/partial/footer')
+    {{-- @include('layouts-customer/partial/footer') --}}
     <!--! icons -->
     <script src="{{ asset('assets/sweetalert/sweetalert.min.js') }}"></script>
     @if (session('message'))

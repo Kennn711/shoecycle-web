@@ -48,7 +48,7 @@ class DriverController extends Controller
         $validation['role'] = "driver";
 
         if ($request->hasFile('avatar')) {
-            $file_name = $request->file('avatar')->getClientOriginalName();
+            $file_name = rand(1000, 9999) . date("ymdHis") . '.' . $request->file('avatar')->getClientOriginalName();
             $request->file('avatar')->move(public_path('uploads/avatar/'), $file_name);
             $validation['avatar'] = $file_name;
         }
@@ -115,7 +115,7 @@ class DriverController extends Controller
             }
 
             // Simpan Foto Profil yang baru
-            $file_name = $request->file('avatar')->getClientOriginalName();
+            $file_name = rand(1000, 9999) . date("ymdHis") . '.' . $request->file('avatar')->getClientOriginalName();
             $request->file('avatar')->move(public_path('uploads/avatar/'), $file_name);
             $validation['avatar'] = $file_name;
         }

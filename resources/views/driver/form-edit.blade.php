@@ -31,7 +31,11 @@
                         <div class="grid max-w-2xl mx-auto mt-8">
                             <div class="mx-auto w-64 text-center">
                                 <div class="relative w-64 h-64 cursor-pointer" onclick="document.getElementById('avatar').click();">
-                                    <img id="preview-img" class="w-64 h-64 rounded-full object-cover shadow-2xl" src="{{ asset('uploads/avatar/' . $driver->avatar) }}" alt="Foto Profil Driver" />
+                                    @if (empty($driver->avatar))
+                                        <img id="preview-img" class="w-64 h-64 rounded-full object-cover shadow-2xl" src="{{ asset('uploads/avatar/empty-avatar.webp') }}" alt="Foto Profil Driver" />
+                                    @else
+                                        <img id="preview-img" class="w-64 h-64 rounded-full object-cover shadow-2xl" src="{{ asset('uploads/avatar/' . $driver->avatar) }}" alt="Foto Profil Driver" />
+                                    @endif
                                     <div class="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-full absolute top-0 left-0 flex justify-center items-center transition duration-500">
                                         <i class="bi bi-upload hidden group-hover:block w-12 text-4xl"></i>
                                     </div>
@@ -100,8 +104,8 @@
                                     </div>
 
                                 </div>
-                                <hr class="mt-8 border-gray-300 dark:border-gray-700">
-                                <button class="w-full mt-8 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#1E293B] text-white hover:rounded-3xl duration-300 focus:outline-none focus:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none">Ubah</button>
+                                <hr class="mt-8 mb-8 border-gray-300 dark:border-gray-700">
+                                <button class="w-full py-3 px-4 transition-all duration-300 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-3xl border border-transparent bg-[#1E293B] text-white hover:shadow-md hover:shadow-slate-600 focus:outline-none focus:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none">Ubah</button>
                             </div>
                         </div>
                     </form>

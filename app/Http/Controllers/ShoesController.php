@@ -49,8 +49,7 @@ class ShoesController extends Controller
         // Memeriksa apakah ada file gambar yang diupload
         if ($request->hasFile("image")) {
             foreach ($request->file("image") as $file) {
-
-                $file_name = $file->getClientOriginalName();
+                $file_name = rand(1000, 9000) . date("ymdHis") . '.' . $file->getClientOriginalName();
 
                 // Memindahkan file gambar ke folder public/uploads/shoes
                 $file->move(public_path("uploads/shoes/"), $file_name);
@@ -120,7 +119,7 @@ class ShoesController extends Controller
 
             // Simpan gambar baru
             foreach ($request->file('image') as $file) {
-                $file_name = time() . '_' . $file->getClientOriginalName();
+                $file_name = rand(1000, 9999) . date("ymdHis") . '.' . $file->getClientOriginalName();
                 $file->move(public_path("uploads/shoes/"), $file_name);
 
                 // Simpan detail gambar ke dalam tabel image_detail

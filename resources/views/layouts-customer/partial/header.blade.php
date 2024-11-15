@@ -34,8 +34,11 @@
             </form>
             <div class="icons hidden mr-2 text-3xl md:flex gap-8 text-gray-600">
                 <div class="relative">
-
-                    <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" src="{{ asset('uploads/avatar/' . Auth::user()->avatar) }}" alt="User dropdown" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+                    @if (empty(Auth::user()->avatar))
+                        <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" src="{{ asset('uploads/avatar/empty-avatar.webp') }}" alt="User dropdown" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+                    @else
+                        <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" src="{{ asset('uploads/avatar/' . Auth::user()->avatar) }}" alt="User dropdown" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+                    @endif
 
                     <!-- Dropdown menu -->
                     <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
@@ -57,7 +60,7 @@
                 </div>
                 <div class="relative">
                     <a href="{{ route('view.cart') }}">
-                        <span class="text-xs text-center font-semibold text-white absolute -top-2 -right-2 w-4 h-4 bg-green-900 rounded-full">{{ session('count_cart') }}</span>
+                        <span class="text-xs text-[0.50rem] text-center font-semibold text-white absolute top-[2px] lg:-top-2 -right-2 w-3 h-3 lg:w-4 lg:h-4 bg-green-900 rounded-full">{{ session('count_cart') }}</span>
                         <i class="bi bi-cart4 text-green-900"></i>
                     </a>
                 </div>

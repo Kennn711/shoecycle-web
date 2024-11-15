@@ -36,11 +36,6 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function payment()
-    {
-        return view("payment.payment");
-    }
-
     public function cart()
     {
         return view("transaction.cart");
@@ -105,7 +100,7 @@ class TransactionController extends Controller
         // Upload file (image) bukti pembayaran ke folder public/uploads/payment
         if ($request->hasFile('proof_of_payment')) {
             $file = $request->file('proof_of_payment');
-            $file_name = $file->getClientOriginalName();
+            $file_name = rand(1000, 9999) . date("ymdHis") . '.' . $file->getClientOriginalName();
             $file->move(public_path("uploads/payment/"), $file_name);
 
             $validation['proof_of_payment'] = $file_name;
@@ -233,21 +228,29 @@ class TransactionController extends Controller
         // Ambil transaksi_id
         $transactionId = $request->input('checkbox');
 
-        // Proses menyimpan driver_id ke dalam table transaction
-        foreach ($transactionId as $see) {
-            $transaction = Transaction::find($see);
+        // Periksa apakah checkbox memiliki data
+        if (is_array($transactionId) && count($transactionId) > 0) {
+            foreach ($transactionId as $see) {
+                $transaction = Transaction::find($see);
 
-            if ($transaction) {
-                $transaction->driver_id = $driverId;
-                $transaction->save();
+                if ($transaction) {
+                    $transaction->driver_id = $driverId;
+                    $transaction->save();
+                }
             }
+
+            $message = [
+                "type-message" => "success",
+                "message" => "Berhasil Tambah Pesanan <b>$transaction->code</b> !"
+            ];
+            return redirect()->route('myorder.view')->with($message);
+        } else {
+            // Jika tidak ada transaksi yang dipilih
+            $message = [
+                "type-message" => "error",
+                "message" => "Tidak ada pesanan yang <br> dipilih !"
+            ];
+            return redirect()->back()->with($message);
         }
-
-        $message = [
-            "type-message" => "success",
-            "message" => "Berhasil Tambah Pesanan <br> <b>$transaction->code</b>"
-        ];
-
-        return redirect()->route('myorder.view')->with($message);
     }
 }

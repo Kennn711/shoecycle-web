@@ -9,7 +9,7 @@
                 @if (!empty(auth()->user()->avatar))
                     <img src="{{ asset('uploads/avatar/' . auth()->user()->avatar) }}" alt="Profile Picture" class="w-12 h-12 rounded-full">
                 @else
-                    <img src="{{ asset('uploads/avatar/empty-avatar.png') }}" alt="Profile Picture" class="w-12 h-12 rounded-full">
+                    <img src="{{ asset('uploads/avatar/empty-avatar.webp') }}" alt="Profile Picture" class="w-12 h-12 rounded-full">
                 @endif
                 <p class="ml-3 text-base first-letter:uppercase">{{ auth()->user()->name }}</p>
                 <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">

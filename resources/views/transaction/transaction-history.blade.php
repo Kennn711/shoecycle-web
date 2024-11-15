@@ -1,30 +1,31 @@
 @extends('layouts-customer.index')
 @section('title-frontend', 'ShoeCycle | Riwayat Transaksi')
 @section('content-frontend')
-    <div class="shadow-lg rounded-lg overflow-x-auto mx-4 md:mx-10 mt-28">
-        <h1 class="text-center mb-5 font-bold uppercase text-2xl">Riwayat Transaksi yang Anda Lakukan</h1>
+
+    <div class="shadow-lg rounded-lg overflow-x-auto mb-80 mx-4 md:mx-10 mt-10 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-28">
+        <h1 class="text-center mb-5 font-bold uppercase text-sm md:text-xl lg:text-2xl">Riwayat Transaksi yang Anda Lakukan</h1>
         <table class="min-w-full divide-y divide-gray-200">
             <thead>
                 <tr class="bg-gray-200">
-                    <th class="w-1/12 py-4 px-3 text-left text-gray-600 font-bold uppercase">No</th>
-                    <th class="w-2/12 md:w-1/6 py-4 px-3 text-left text-gray-600 font-bold uppercase">Nama</th>
-                    <th class="w-2/12 md:w-1/6 py-4 px-3 text-left text-gray-600 font-bold uppercase">Bukti Pembayaran</th>
-                    <th class="w-2/12 md:w-1/6 py-4 px-3 text-left text-gray-600 font-bold uppercase">Tanggal Pembelian</th>
-                    <th class="hidden md:table-cell w-2/12 md:w-1/6 py-4 px-3 text-left text-gray-600 font-bold uppercase">Tanggal Diterima</th>
-                    <th class="w-2/12 md:w-1/6 py-4 px-3 text-left text-gray-600 font-bold uppercase">Total</th>
-                    <th class="w-2/12 md:w-1/6 py-4 px-3 text-left text-gray-600 font-bold uppercase">Detail</th>
-                    <th class="w-2/12 md:w-1/6 py-4 px-3 text-left text-gray-600 font-bold uppercase">Status Transaksi</th>
-                    <th class="hidden md:table-cell w-2/12 md:w-1/6 py-4 px-3 text-left text-gray-600 font-bold uppercase">Status Pengiriman</th>
+                    <th class="w-1/12 py-1 px-1 text-center font-bold text-[0.5rem] md:text-base sm:py-3 sm:px-2 md:py-3 md:px-3 uppercase">No</th>
+                    <th class="w-2/12 md:w-1/6 py-1 px-1 text-center font-bold text-[0.5rem] md:text-base sm:py-3 sm:px-2 md:py-3 md:px-3 uppercase">Nama</th>
+                    <th class="w-2/12 md:w-1/6 py-1 px-1 text-center font-bold text-[0.5rem] md:text-base sm:py-3 sm:px-2 md:py-3 md:px-3 uppercase">Bukti Pembayaran</th>
+                    <th class="w-2/12 md:w-1/6 py-1 px-1 text-center font-bold text-[0.5rem] md:text-base sm:py-3 sm:px-2 md:py-3 md:px-3 uppercase">Tanggal Pembelian</th>
+                    <th class="hidden 2xl:table-cell w-2/12 md:w-1/6 py-1 px-1 text-center text-gray-600 font-bold md:py-4 md:px-3 uppercase">Tanggal Diterima</th>
+                    <th class="hidden 2xl:table-cell w-2/12 md:w-1/6 py-1 px-1 text-center text-gray-600 font-bold md:py-4 md:px-3 uppercase">Total</th>
+                    <th class="w-2/12 md:w-1/6 py-1 px-1 text-center font-bold text-[0.5rem] md:text-base sm:py-3 sm:px-2 md:py-3 md:px-3 uppercase">Detail</th>
+                    <th class="hidden xl:table-cell w-2/12 md:w-1/6 py-1 px-1 text-center text-gray-600 font-bold md:py-4 md:px-3 uppercase">Status Transaksi</th>
+                    <th class="hidden xl:table-cell w-2/12 md:w-1/6 py-1 px-1 text-center text-gray-600 font-bold md:py-4 md:px-3 uppercase">Status Pengiriman</th>
                 </tr>
             </thead>
             <tbody class="bg-white">
                 @foreach ($transaction as $see)
                     <tr>
-                        <td class="py-4 px-6 border-b border-gray-200">{{ $loop->iteration }}</td>
-                        <td class="py-4 px-6 border-b border-gray-200">{{ $see->user->name }}</td>
-                        <td class="py-4 px-6 border-b border-gray-200">
+                        <td class="py-2 md:py-4 px-1 md:px-6 text-center text-[0.5rem] md:text-base border-b border-gray-200">{{ $loop->iteration }}</td>
+                        <td class="py-2 md:py-4 px-1 md:px-6 text-center text-[0.5rem] md:text-base border-b border-gray-200">{{ $see->user->name }}</td>
+                        <td class="py-2 md:py-4 px-1 md:px-6 text-center border-b border-gray-200">
                             @php $modalId = "modal-" . $see->id; @endphp
-                            <button data-modal-target="{{ $modalId }}" data-modal-toggle="{{ $modalId }}" class="text-sm w-40 font-semibold bg-gray-300 hover:bg-gray-400 transition-colors duration-200 uppercase text-white px-5 py-2.5 rounded-lg">LIHAT GAMBAR</button>
+                            <button data-modal-target="{{ $modalId }}" data-modal-toggle="{{ $modalId }}" class="text-[0.5rem] md:text-sm w-20 md:w-32 lg:w-40 font-semibold bg-gray-300 hover:bg-gray-400 transition-colors duration-200 uppercase text-white px-1 md:px-3 lg:px-5 py-1 md:py-2.5 rounded-lg">LIHAT GAMBAR</button>
 
                             <div id="{{ $modalId }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -42,12 +43,12 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="py-4 px-6 border-b border-gray-200">{{ $see->payment_date }}</td>
-                        <td class="hidden md:table-cell py-4 px-6 border-b border-gray-200">{{ $see->received_date }}</td>
-                        <td class="py-4 px-6 border-b border-gray-200">Rp {{ number_format($see->total, 0, ',', '.') }}</td>
-                        <td class="py-4 px-6 border-b border-gray-200">
+                        <td class="py-4 px-1 lg:px-6 text-center border-b text-[0.5rem] md:text-base border-gray-200">{{ $see->payment_date }}</td>
+                        <td class="hidden 2xl:table-cell text-center py-4 px-6 border-b text-xs md:text-base border-gray-200">{{ $see->received_date }}</td>
+                        <td class="hidden 2xl:table-cell text-center py-4 px-6 border-b border-gray-200">Rp {{ number_format($see->total, 0, ',', '.') }}</td>
+                        <td class="py-4 px-6 border-b text-center border-gray-200">
                             @php $modalDetailId = "modaldetail-" . $see->id; @endphp
-                            <button data-modal-target="{{ $modalDetailId }}" data-modal-toggle="{{ $modalDetailId }}" class="text-sm w-40 font-semibold bg-gray-300 hover:bg-gray-400 transition-colors duration-200 uppercase text-white px-5 py-2.5 rounded-lg">LIHAT DETAIL</button>
+                            <button data-modal-target="{{ $modalDetailId }}" data-modal-toggle="{{ $modalDetailId }}" class="text-[0.5rem] md:text-base w-20 md:w-32 lg:w-40 font-semibold bg-gray-300 hover:bg-gray-400 transition-colors duration-200 uppercase text-white px-1 md:px-3 lg:px-5 py-1 md:py-2.5 rounded-lg">LIHAT DETAIL</button>
 
                             <div id="{{ $modalDetailId }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -201,7 +202,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="py-4 px-6 border-b border-gray-200">
+                        <td class="hidden xl:table-cell py-4 px-3 2xl:px-6 border-b border-gray-200">
                             @if ($see->transaction_status == 'pending')
                                 <button disabled class="text-sm w-40 font-semibold bg-gray-300 uppercase text-white px-5 py-2.5 rounded-lg">PENDING</button>
                             @endif
@@ -215,7 +216,7 @@
                                 <button disabled class="text-sm w-40 font-semibold bg-green-700 uppercase text-white px-5 py-2.5 rounded-lg">SELESAI</button>
                             @endif
                         </td>
-                        <td class="hidden md:table-cell py-4 px-6 border-b border-gray-200">
+                        <td class="hidden xl:table-cell py-4 px-3 2xl:px-6 border-b border-gray-200">
                             @if ($see->transaction_status == 'pending' && is_null($see->delivery_status))
                                 <button disabled class="text-sm w-40 font-semibold bg-gray-300 uppercase text-white px-5 py-2.5 rounded-lg">PENDING</button>
                             @endif

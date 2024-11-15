@@ -45,7 +45,11 @@
                         <td class="px-6 py-4">{{ $loop->iteration }}</td>
                         <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
                             <div class="relative h-10 w-10">
-                                <img class="h-full w-full rounded-full object-cover object-center" src="{{ asset('uploads/avatar/' . $see->avatar) }}" alt="" />
+                                @if (empty($see->avatar))
+                                    <img class="h-full w-full rounded-full object-cover object-center" src="{{ asset('uploads/avatar/empty-avatar.webp  ') }}" alt="" />
+                                @else
+                                    <img class="h-full w-full rounded-full object-cover object-center" src="{{ asset('uploads/avatar/' . $see->avatar) }}" alt="" />
+                                @endif
                             </div>
                             <div class="text-sm">
                                 <div class="font-medium text-gray-700">{{ $see->name }}</div>

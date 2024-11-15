@@ -37,7 +37,7 @@
                                 @if (!empty($user->avatar))
                                     <img id="preview-img" name="avatar" class="w-64 h-64 rounded-full object-cover shadow-xl" src="{{ asset('uploads/avatar/' . $user->avatar) }}" />
                                 @else
-                                    <img id="preview-img" name="avatar" class="w-64 h-64 rounded-full object-cover shadow-xl" src="{{ asset('uploads/avatar/empty-avatar.png') }}" />
+                                    <img id="preview-img" name="avatar" class="w-64 h-64 rounded-full object-cover shadow-xl" src="{{ asset('uploads/avatar/empty-avatar.webp') }}" />
                                 @endif
                                 <div class="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-full absolute top-0 left-0 flex justify-center items-center transition-all duration-500">
                                     <i class="bi bi-upload hidden group-hover:block w-12 text-4xl"></i>

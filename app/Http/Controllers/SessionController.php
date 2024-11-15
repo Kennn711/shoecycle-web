@@ -49,9 +49,14 @@ class SessionController extends Controller
                 return redirect()->intended('order')->with($message);
             } else if ($user->role === 'driver') {
                 return redirect()->intended('ordershoes')->with($message);
-            } else {
-                return redirect()->route('login.view');
             }
+        } else {
+            $message = [
+                'type-message' => 'error',
+                'message' => 'Email / Password anda salah !'
+            ];
+
+            return redirect()->back()->with($message);
         }
     }
 
