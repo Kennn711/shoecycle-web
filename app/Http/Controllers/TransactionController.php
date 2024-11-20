@@ -223,7 +223,7 @@ class TransactionController extends Controller
     // Proses menyimpan data transaksi ke dalam view myorder sesuai id driver
     function addToMyOrder(Request $request)
     {
-        $driverId = Auth::id(); // Mengambil driver_id yang sedang login
+        $driverId = Auth::id();
 
         // Ambil transaksi_id
         $transactionId = $request->input('checkbox');
