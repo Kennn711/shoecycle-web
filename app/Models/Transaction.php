@@ -12,6 +12,13 @@ class Transaction extends Model
 
     protected $guarded = ['id'];
 
+    const STATUS_PENDING = "pending";
+
+    static function code()
+    {
+        return 'SYC-' . rand(10000, 99999);
+    }
+
     function transactiondetails()
     {
         return $this->hasMany(TransactionDetail::class);

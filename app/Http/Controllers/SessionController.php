@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
+use function PHPUnit\Framework\isNull;
+
 class SessionController extends Controller
 {
     function index()
@@ -19,14 +21,8 @@ class SessionController extends Controller
         return view("auth.login");
     }
 
-    function registerPage()
-    {
-        return view("auth.register");
-    }
-
     function login(Request $request)
     {
-
         $validation = $request->validate([
             'email' => 'required',
             'password' => 'required'
@@ -55,7 +51,6 @@ class SessionController extends Controller
                 'type-message' => 'error',
                 'message' => 'Email / Password anda salah !'
             ];
-
             return redirect()->back()->with($message);
         }
     }
@@ -68,13 +63,22 @@ class SessionController extends Controller
             'password' => 'required',
         ]);
 
-        $validation['password'] = password_hash($validation['password'], PASSWORD_BCRYPT);
+        $duplicateName = User::where("name", $request->name);
+        if ($duplicateName) {
+            $message = [
+                'type-message' => 'warning',
+                'message' => 'Nama anda sudah terdaftar !'
+            ];
+            return redirect()->back()->withInput()->with($message);
+        }
+
+        $validation['password'] = bcrypt($request->password);
 
         User::create($validation);
 
         $message = [
             "type-message" => "success",
-            "message" => "Anda Berhasil Membuat Akun <br><b>Silahkan Login</b>"
+            "message" => "Anda Berhasil Membuat Akun <br><b>Silahkan Login !</b>"
         ];
 
         return redirect()->route("login")->with($message);

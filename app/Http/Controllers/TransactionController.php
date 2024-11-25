@@ -45,7 +45,7 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
         $cart = session('cart');
-
+        session()->put('count_cart', 0);
         // Logika jika No HP / Alamat masih kosong (belum diisi)
         if (empty($user->no_hp) || empty($user->address)) {
             return redirect()->route("complete.profile");
@@ -90,7 +90,6 @@ class TransactionController extends Controller
         }
 
         // membuat kode resi
-        $code = 'SYC-' . rand(10000, 99999);
 
         // Menghitung total dari keranjang
         $total = array_sum(array_map(function ($item) {
@@ -109,11 +108,11 @@ class TransactionController extends Controller
         // Menyimpan transaksi ke dalam table transaction
         $transaction = Transaction::create([
             'user_id' => $user->id,
-            'code' => $code,
+            'code' => Transaction::code(),
             'proof_of_payment' => $validation['proof_of_payment'],
             'total' => $total, // dapat dari session cart
             'payment_date' => now(),
-            'transaction_status' => 'pending',
+            'transaction_status' => Transaction::STATUS_PENDING,
         ]);
 
         // Menyimpan Detail Transaksi

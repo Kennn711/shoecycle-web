@@ -62,8 +62,8 @@
         <!-- Layanan dan Sosial Media -->
         <div class="ml-1 sm:ml-4 md:ml-12 lg:ml-20 mb-2 sm:mb-3">
             <h1 class="text-white text-[0.50rem] sm:text-base font-bold">Layanan Pengaduan Konsumen ShoeCycle</h1>
-            <p class="mt-2 text-white text-[0.50rem] sm:text-sm"><a href="">Email: shoecycle@gmail.com</a></p>
-            <p class="text-white text-[0.50rem] sm:text-sm"><a href="">WhatsApp: +62 857 0463 7649</a></p>
+            <p class="mt-2 text-white text-[0.50rem] sm:text-sm"><a href="#">Email: shoecycle@gmail.com</a></p>
+            <p class="text-white text-[0.50rem] sm:text-sm"><a href="https://wa.me/6285704637649" target="_blank">WhatsApp: +62 857 0463 7649</a></p>
 
             <!-- Sosial Media -->
             <p class="mt-2 sm:mt-6 md:mt-9 text-white text-[0.50rem] md:text-base font-bold">Temukan Kami</p>

@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Route;
 
 // Page Auth (Login / Register)
 Route::get("/", [SessionController::class, 'loginPage'])->name("login");
-Route::get("register", [SessionController::class, 'registerPage'])->name("register");
 
 // Validasi
 Route::post("/register", [SessionController::class, 'register'])->name("auth.register");
 Route::post("/login", [SessionController::class, "login"])->name("auth.login");
-
 
 Route::middleware('auth')->group(function () {
     // Fungsi Logout
