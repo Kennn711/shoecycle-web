@@ -37,7 +37,7 @@ class ShoesController extends Controller
             "price" => "required",
             "stock" => "required",
             "description" => "required",
-            "image.*" => "required|image|mimes:jepg,png,jpg"
+            "image.*" => "required|image|mimes:jepg,png,jpg,webp"
         ]);
 
         // Menghapus "image" dari array validation agar tidak disimpan ke dalam tabel shoes
