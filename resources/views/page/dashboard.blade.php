@@ -168,27 +168,49 @@
 
         <!-- Table 2: Table Kanan -->
         <div class="bg-white shadow-md rounded-3xl p-6">
-            <h2 class="text-xl font-semibold mb-4">Table Kanan</h2>
+            <div class="flex justify-between">
+                <h2 class="text-xl font-semibold mb-4">Data Driver</h2>
+                <a href="{{ route('driver.index') }}" class="font-semibold hover:underline">Lihat Semua</a>
+            </div>
+            <hr class="mb-1">
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white">
                     <thead>
                         <tr>
-                            <th class="py-2 px-4 border-b">Kolom A</th>
-                            <th class="py-2 px-4 border-b">Kolom B</th>
-                            <th class="py-2 px-4 border-b">Kolom C</th>
-                            <th class="py-2 px-4 border-b">Kolom D</th>
-                            <th class="py-2 px-4 border-b">Kolom E</th>
+                            <th class="py-2 px-4 border-b">Nama</th>
+                            <th class="py-2 px-4 border-b">Alamat</th>
+                            <th class="py-2 px-4 border-b">Nomor Hp</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="py-2 px-4 border-b text-center">Data A</td>
-                            <td class="py-2 px-4 border-b text-center">Data B</td>
-                            <td class="py-2 px-4 border-b text-center">Data C</td>
-                            <td class="py-2 px-4 border-b text-center">Data D</td>
-                            <td class="py-2 px-4 border-b text-center">Data E</td>
-                        </tr>
-                        <!-- Tambahkan data lain sesuai kebutuhan -->
+                        @foreach ($driverData as $see)
+                            <tr>
+                                <th class="flex gap-3 px-6 py-4 font-normal text-gray-900 items-center justify-center">
+                                    <div class="relative h-10 w-10">
+                                        @if (empty($see->avatar))
+                                            <img class="h-full w-full rounded-full object-cover object-center" src="{{ asset('uploads/avatar/empty-avatar.webp  ') }}" alt="" />
+                                        @else
+                                            <img class="h-full w-full rounded-full object-cover object-center" src="{{ asset('uploads/avatar/' . $see->avatar) }}" alt="" />
+                                        @endif
+                                    </div>
+                                    <div class="text-sm">
+                                        <div class="font-medium text-gray-700">{{ $see->name }}</div>
+                                        <div class="text-gray-400">{{ $see->email }}</div>
+                                    </div>
+                                </th>
+                                @if (empty($see->address))
+                                    <td class="py-2 px-4 border-b text-center">Belum Memasukkan</td>
+                                @else
+                                    <td class="py-2 px-4 border-b text-center">{{ $see->address }}</td>
+                                @endif
+
+                                @if (empty($see->no_hp))
+                                    <td class="py-2 px-4 border-b text-center">Belum Memasukkan</td>
+                                @else
+                                    <td class="py-2 px-4 border-b text-center">{{ $see->no_hp }}</td>
+                                @endif
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

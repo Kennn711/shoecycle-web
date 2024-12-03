@@ -19,6 +19,8 @@ class DashboardController extends Controller
         $transactionCount = Transaction::count();
         $transactionPendingCount = Transaction::where('transaction_status', 'pending')->count();
 
-        return view("page.dashboard", compact('customerCount', 'driverCount', 'shoesCount', 'transactionCount', 'transactions', 'transactionPendingCount'));
+        $driverData = User::where('role', 'driver')->limit(5)->get();
+
+        return view("page.dashboard", compact('customerCount', 'driverCount', 'shoesCount', 'transactionCount', 'transactions', 'transactionPendingCount', 'driverData'));
     }
 }

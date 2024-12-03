@@ -62,15 +62,14 @@ class SessionController extends Controller
             'email' => 'required|unique:users',
             'password' => 'required',
         ]);
-
-        $duplicateName = User::where("name", $request->name);
-        if ($duplicateName) {
-            $message = [
-                'type-message' => 'warning',
-                'message' => 'Nama anda sudah terdaftar !'
-            ];
-            return redirect()->back()->withInput()->with($message);
-        }
+        // $duplicateName = User::where("name", $request->name);
+        // if ($duplicateName) {
+        //     $message = [
+        //         'type-message' => 'warning',
+        //         'message' => 'Nama anda sudah terdaftar !'
+        //     ];
+        //     return redirect()->back()->withInput()->with($message);
+        // }
 
         $validation['password'] = bcrypt($request->password);
 
@@ -127,7 +126,7 @@ class SessionController extends Controller
             'name'     => 'required',
             'no_hp'    => 'nullable',
             'address'  => 'nullable',
-            'avatar'    => 'image|mimes:jpeg,png,jpg'
+            'avatar'    => 'image|mimes:jpeg,png,jpg,webp'
         ]);
 
         // cek pass

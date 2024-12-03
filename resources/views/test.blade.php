@@ -1,118 +1,76 @@
-@extends('layouts-backend/index')
+<!DOCTYPE html>
+<html lang="en" class="dark">
 
-@section('backend-title', 'Admin | Tabel Transaksi')
-@section('breadcumb-role', 'Admin')
-@section('breadcumb-title', 'Data Transaksi')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>Lengkapi Profil Anda</title>
+</head>
 
-@section('backend-content')
-    <div class=" py-1 bg-blueGray-50">
-        <div class="w-full lg:w-5/12 px-4 mx-auto mt-6">
-            <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-3xl bg-white border-0">
-                <div class="rounded-t-3xl bg-[#1E293B] mb-0 px-6 py-6 border-b-2">
-                    <div class="text-center flex justify-between">
-                        <h6 class="text-white text-xl font-bold">
-                            Pengaturan Akun
-                        </h6>
+<body class="dark:bg-gray-900">
+    <div class="max-w-md mx-auto my-5">
+        <div class="bg-white shadow-md rounded-lg p-6 dark:bg-gray-800">
+            <div class="flex justify-between items-center mb-1">
+                <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Profil Akun</h2>
+                @if (Auth()->user()->role == 'customer')
+                    <a href="{{ route('view.cart') }}" class="font-semibold uppercase text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">Kembali</a>
+                @endif
+                @if (Auth()->user()->role == 'admin')
+                    <a href="{{ route('page.dashboard') }}" class="font-semibold uppercase text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">Kembali</a>
+                @endif
+                @if (Auth()->user()->role == 'driver')
+                    <a href="{{ route('ordershoes.view') }}" class="font-semibold uppercase text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">Kembali</a>
+                @endif
+            </div>
+            <form action="{{ route('store.profile', $user->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="relative z-0 w-full mb-5 group">
+                    <input type="email" value="{{ old('email', $user->email) }}" name="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
+                </div>
+                <div class="relative z-0 w-full mb-5 group">
+                    <input type="text" name="name" value="{{ old('username', $user->name) }}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="floating_username" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Username</label>
+                </div>
+                <div class="relative z-0 w-full mb-5 group">
+                    <input type="password" name="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                    <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                </div>
+                <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="text" value="{{ old('address', $user->address) }}" name="address" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                        <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Alamat</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="number" value="{{ old('no_hp', $user->no_hp) }}" name="no_hp" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                        <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nomor Telepon</label>
                     </div>
                 </div>
-                <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                    <form>
-                        <h6 class="text-blueGray-400 text-sm mt-3 mb-0 font-bold uppercase">
-                            Informasi Akun
-                        </h6>
-                        <div class="mx-auto w-64 text-center">
-                            <div class="relative w-64 h-64 cursor-pointer mb-5" onclick="document.getElementById('avatar').click();">
-                                <img id="preview-img" name="avatar" class="w-64 h-64 rounded-full object-cover shadow-xl" src="" />
-                                <div class="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-full absolute top-0 left-0 flex justify-center items-center transition-all duration-500">
-                                    <i class="bi bi-upload hidden group-hover:block w-12 text-4xl"></i>
-                                </div>
-                            </div>
-                            <input type="file" id="avatar" name="avatar" class="hidden" accept="image/*" onchange="previewFile()">
-                            <!-- Tambahkan elemen ini untuk menampilkan nama file -->
-                            <p id="file-name" class="mt-0 mb-5 text-sm text-gray-600"></p>
 
-                            <script>
-                                function previewFile() {
-                                    const fileInput = document.getElementById('avatar');
-                                    const previewImg = document.getElementById('preview-img');
-                                    const fileNameDisplay = document.getElementById('file-name');
+                <!-- Menampilkan Gambar Profil jika ada -->
 
-                                    const file = fileInput.files[0];
-                                    if (file) {
-                                        const reader = new FileReader();
-                                        reader.onload = function(e) {
-                                            previewImg.src = e.target.result;
-                                        };
-                                        reader.readAsDataURL(file);
-
-                                        // Tampilkan nama file di bawah gambar
-                                        fileNameDisplay.textContent = file.name;
-                                    } else {
-                                        previewImg.src = 'https://images.pexels.com/photos/2690323/pexels-photo-2690323.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
-                                        fileNameDisplay.textContent = '';
-                                    }
-                                }
-                            </script>
-
-                        </div>
-                        <div class="flex flex-wrap">
-                            <div class="w-full lg:w-6/12 px-4">
-                                <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                        Username
-                                    </label>
-                                    <input type="text" name="name" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                </div>
-                            </div>
-                            <div class="w-full lg:w-6/12 px-4">
-                                <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                        Email
-                                    </label>
-                                    <input type="email" name="email" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                </div>
-                            </div>
-                            <div class="w-full lg:w-12/12 px-4 mt-3">
-                                <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                        Password
-                                    </label>
-                                    <input type="password" name="password" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="mt-6 border-b-1 border-blueGray-300">
-
-                        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                            Informasi Diri
-                        </h6>
-                        <div class="flex flex-wrap">
-                            <div class="w-full lg:w-6/12 px-4">
-                                <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                        Alamat Lengkap
-                                    </label>
-                                    <input type="text" name="address" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                </div>
-                            </div>
-                            <div class="w-full lg:w-6/12 px-4">
-                                <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                        Nomor Telepon
-                                    </label>
-                                    <input type="email" name="no_hp" class="transition-all duration-300 block w-full border-gray-200 rounded-lg text-sm focus:border-[#1E293B] focus:ring-[#1E293B] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="mt-6 border-b-1 border-blueGray-300">
-                        <div class="mt-8 grid">
-                            <button class="w-full py-3 px-4 transition-all duration-300 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-3xl border border-transparent bg-[#1E293B] text-white hover:shadow-md hover:shadow-slate-600 focus:outline-none focus:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none">Ubah</button>
-                        </div>
-                    </form>
+                <div class="relative z-0 w-full mb-5 group">
+                    <label for="file_input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ubah Avatar Akun Anda</label>
+                    <input id="file_input" name="avatar" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help">
                 </div>
-            </div>
+                <div class="mb-5 grid place-items-center w-full">
+                    @if ($user->avatar)
+                        <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mx-auto">Avatar Lama Anda</p>
+                        <img src="{{ asset('uploads/avatar/' . $user->avatar) }}" alt="Gambar Profil" class="w-24 h-24 rounded-full mb-4 mx-auto">
+                    @else
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-300">Belum ada gambar profil.</p>
+                    @endif
+                </div>
+
+                <button class="w-full font-semibold uppercase text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">UBAH</button>
+            </form>
         </div>
     </div>
-@endsection
+
+    @extends('layouts.partial.script')
+</body>
+
+</html>

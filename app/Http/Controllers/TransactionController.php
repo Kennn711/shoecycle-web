@@ -48,7 +48,12 @@ class TransactionController extends Controller
         session()->put('count_cart', 0);
         // Logika jika No HP / Alamat masih kosong (belum diisi)
         if (empty($user->no_hp) || empty($user->address)) {
-            return redirect()->route("complete.profile");
+            $message = [
+                'type-message' => 'warning',
+                'message' => 'Mohon lengkapi data diri anda !'
+            ];
+
+            return redirect()->route("complete.profile")->with($message);
         }
 
         // Mengambil data wallet dari database
@@ -78,16 +83,26 @@ class TransactionController extends Controller
         $user = Auth::user(); // mengambil data user yang sedang login
 
         $validation = $request->validate([
-            'proof_of_payment' => 'required|image|mimes:jpeg,jpg,png',
+            'proof_of_payment' => 'required|image|mimes:jpeg,jpg,png,webp',
         ]);
 
-        if (empty($user->no_hp) || empty($user->address)) {
+        if (empty($user->no_hp)) {
             $message = [
                 "type-message" => "warning",
-                "message" => "Mohon Lengkapi Alamat dan Nomor Telepon Anda"
+                "message" => "Mohon Lengkapi Nomor Telepon Anda"
             ];
             return redirect()->route("complete.profile")->with($message);
         }
+
+        if (empty($user->address)) {
+            $message = [
+                "type-message" => "warning",
+                "message" => "Mohon Lengkapi Alamat Anda"
+            ];
+            return redirect()->route("complete.profile")->with($message);
+        }
+        // || empty($user->address)) {
+
 
         // membuat kode resi
 

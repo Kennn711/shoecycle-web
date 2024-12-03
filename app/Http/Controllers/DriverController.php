@@ -37,7 +37,7 @@ class DriverController extends Controller
             "password" => "required",
             "no_hp"    => "nullable|numeric",
             "address"  => "",
-            "avatar"   => 'nullable|image|mimes:jpeg,png,jpg'
+            "avatar"   => 'nullable|image|mimes:jpeg,png,jpg,webp'
         ]);
 
 
@@ -96,7 +96,7 @@ class DriverController extends Controller
             "email"   => "required|unique:users,email,$id",
             "no_hp"   => "nullable|numeric",
             "address" => "nullable",
-            "avatar"  => "image|mimes:jpeg,png,jpg"
+            "avatar"  => "image|mimes:jpeg,png,jpg,webp"
         ]);
 
         if (!empty($request->password)) {
@@ -140,6 +140,9 @@ class DriverController extends Controller
         $driverName = $driver->name;
 
         $driver->delete();
+
+        $oldAvatarPath = public_path('uploads/avatar/' . $driver->avatar);
+        unlink($oldAvatarPath);
 
         $message = [
             "type-message" => "success",
