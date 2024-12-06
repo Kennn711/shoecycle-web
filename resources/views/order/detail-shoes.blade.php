@@ -71,69 +71,100 @@
                     </div>
                 </form>
             </div>
-
-
         </div>
+        <div class="text-center my-14">
+            <hr class="border-black-300 border-t-2 w-[600px] ml-[50px] -mb-4" />
+            <h1>PRODUK LAINNYA</h1>
+            <hr class="border-black-300 border-t-2 w-[600px] ml-auto mr-[50px] -mt-3" />
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-8 px-4 max-w-full mx-3 lg:mx-10 xl:mx-28 mt-10 mb-10 sm:mt-14 sm:mb-14 md:mt-20 md:mb-20">
+            @foreach ($otherShoes as $see2)
+                <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-gray-100 bg-clip-border text-gray-700 shadow-lg">
+                    <div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
+                        <img src="{{ asset($see2->imagedetail[0]->image) }}" alt="" alt="ui/ux review check">
+                        <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                    </div>
+                    <div class="p-5 flex-grow">
+                        <div class="mb-3 flex items-center justify-between">
+                            <h5 class="block font-sans text-[10px] sm:text-lg xl:text-base 2xl:text-lg font-medium leading-snug max-w-12 sm:max-w-20 md:max-w-48 tracking-normal text-blue-gray-900 antialiased">{{ $see2->name }}</h5>
+                            <p class="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
+                                <span class="text-gray-900 font-bold  text-[0.50rem] sm:text-lg xl:text-sm 2xl:text-lg">Rp {{ number_format($see2->price, 0, ',', '.') }}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="block font-sans text-[7px] sm:text-base font-light leading-relaxed text-gray-700 antialiased truncate">{{ $see2->description }}</p>
+                        </div>
+                    </div>
+                    <div class="p-3 pt-2 sm:p-6 sm:pb-3 mb-2">
+                        <a href="{{ route('order-detail.view', $see2->id) }}">
+                            <button class="block w-full select-none rounded-3xl bg-green-800 py-1.5 px-3 sm:py-3.5 sm:px-7 text-center align-middle font-sans text-[0.50rem] sm:text-sm font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">Lihat Detail
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 
-        <script>
-            function changeImage(src) {
-                document.getElementById('mainImage').src = src;
+    <script>
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+        }
+        //  script tambah kurang jumlah barang 
+        const decrementButton = document.getElementById('decrement-button');
+        const incrementButton = document.getElementById('increment-button');
+        const quantityInput = document.getElementById('quantity-input');
+
+        const minQty = parseInt(quantityInput.min);
+        const maxQty = parseInt(quantityInput.max);
+
+        decrementButton.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > minQty) {
+                quantityInput.value = currentValue - 1;
             }
-            //  script tambah kurang jumlah barang 
-            const decrementButton = document.getElementById('decrement-button');
-            const incrementButton = document.getElementById('increment-button');
-            const quantityInput = document.getElementById('quantity-input');
+        });
 
-            const minQty = parseInt(quantityInput.min);
-            const maxQty = parseInt(quantityInput.max);
-
-            decrementButton.addEventListener('click', () => {
-                let currentValue = parseInt(quantityInput.value);
-                if (currentValue > minQty) {
-                    quantityInput.value = currentValue - 1;
-                }
-            });
-
-            incrementButton.addEventListener('click', () => {
-                let currentValue = parseInt(quantityInput.value);
-                if (currentValue < maxQty) {
-                    quantityInput.value = currentValue + 1;
-                }
-            });
-            // end 
-
-            // animasi ganti gambar produk 
-            let currentIndex = 0;
-            const images = @json($shoes->imagedetail);
-            const mainImage = document.getElementById("mainImage");
-
-            function changeImage(src, index) {
-
-                if (index !== undefined) {
-                    currentIndex = index;
-                } else {
-                    currentIndex = images.findIndex(image => image.image === src);
-                }
-
-                mainImage.classList.remove("opacity-100");
-                mainImage.classList.add("opacity-0");
-
-                setTimeout(() => {
-                    mainImage.src = src;
-                    mainImage.classList.remove("opacity-0");
-                    mainImage.classList.add("opacity-100");
-                }, 200);
+        incrementButton.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue < maxQty) {
+                quantityInput.value = currentValue + 1;
             }
-            //    end 
-        </script>
+        });
+        // end 
 
-        {{-- hilangkan tombol atas bawah pada input jumlah barang yang akan di pesan  --}}
-        <style>
-            input[type="number"]::-webkit-outer-spin-button,
-            input[type="number"]::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
+        // animasi ganti gambar produk 
+        let currentIndex = 0;
+        const images = @json($shoes->imagedetail);
+        const mainImage = document.getElementById("mainImage");
+
+        function changeImage(src, index) {
+
+            if (index !== undefined) {
+                currentIndex = index;
+            } else {
+                currentIndex = images.findIndex(image => image.image === src);
             }
-        </style>
+
+            mainImage.classList.remove("opacity-100");
+            mainImage.classList.add("opacity-0");
+
+            setTimeout(() => {
+                mainImage.src = src;
+                mainImage.classList.remove("opacity-0");
+                mainImage.classList.add("opacity-100");
+            }, 200);
+        }
+        //    end 
+    </script>
+
+    {{-- hilangkan tombol atas bawah pada input jumlah barang yang akan di pesan  --}}
+    <style>
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
     </div>
 @endsection

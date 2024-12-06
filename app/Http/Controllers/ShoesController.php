@@ -188,10 +188,13 @@ class ShoesController extends Controller
 
     public function orderDetail($id)
     {
+        $otherShoes = Shoes::with('imagedetail')->where('id', '!=', $id)->limit(4)->get();
+
         $shoes = Shoes::with("imagedetail")->findOrFail($id);
 
         return view("order.detail-shoes", [
             "shoes" => $shoes,
+            "otherShoes" => $otherShoes,
         ]);
     }
 }
