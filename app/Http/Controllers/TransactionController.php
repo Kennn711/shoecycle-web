@@ -30,7 +30,15 @@ class TransactionController extends Controller
     function indexCustomer()
     {
         $customerId = Auth::id();
-        $transactions = Transaction::with(["transactiondetails", "user", "driver"])->where("user_id", $customerId)->get();
+        $transactions = Transaction::with(["transactiondetails", "user", "driver"])->where("user_id", $customerId)->orderByRaw("
+            CASE
+                WHEN transaction_status = 'pending' THEN 1
+                WHEN transaction_status = 'accepted' THEN 2
+                WHEN transaction_status = 'completed' THEN 3
+                WHEN transaction_status = 'cancelled' THEN 4
+                ELSE 5
+            END
+        ")->get();
         return view("transaction.transaction-history", [
             'transaction' => $transactions
         ]);
@@ -39,30 +47,6 @@ class TransactionController extends Controller
     public function cart()
     {
         return view("transaction.cart");
-    }
-
-    public function checkout()
-    {
-        $user = Auth::user();
-        $cart = session('cart');
-        session()->put('count_cart', 0);
-        // Logika jika No HP / Alamat masih kosong (belum diisi)
-        if (empty($user->no_hp) || empty($user->address)) {
-            $message = [
-                'type-message' => 'warning',
-                'message' => 'Mohon lengkapi data diri anda !'
-            ];
-
-            return redirect()->route("complete.profile")->with($message);
-        }
-
-        // Mengambil data wallet dari database
-        $wallets = Wallet::first();
-
-        return view("payment.payment", [
-            "cart" => $cart,
-            "wallets" => $wallets
-        ]);
     }
 
     function getCartTotal()

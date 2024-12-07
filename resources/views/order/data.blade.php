@@ -132,7 +132,6 @@
     </div>
 
     @if ($shoes->isEmpty())
-        {{--  --}}
         <section class="bg-white py-16 antialiased dark:bg-gray-900 md:py-32 flex justify-center items-center">
             <div class="text-center space-y-6">
                 <img src="{{ asset('uploads/ilustration/empty-shoes.png') }}" alt="" class="h-64 w-auto mx-auto">
@@ -142,7 +141,7 @@
         </section>
     @else
         <div class="flex w-full rounded-full border-2 border-green-800 overflow-hidden max-w-md mx-auto font-[sans-serif]">
-            <input type="text" id="searchShoes" placeholder="Cari Sepatu..." class="w-full rounded-l-full outline-none bg-white text-sm px-5 py-3" />
+            <input type="text" id="searchShoes" placeholder="Cari Sepatu..." class="w-full rounded-l-full outline-none border-green-800 focus:border-green-800 border-2 bg-white text-sm px-5 py-3" />
             <button type='button' class="flex items-center justify-center bg-green-800 hover:bg-green-900 px-6">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.904 192.904" width="18px" class="fill-white">
                     <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
@@ -175,7 +174,8 @@
                                 </button>
                             </a>
                         @else
-                            <button disabled class="bg-red-600 text-white py-2 px-4 rounded-full font-bold transition-colors duration-200 hover:bg-red-700">STOK HABIS</button>
+                            <button class="block w-full select-none rounded-3xl bg-red-600 py-1.5 px-3 sm:py-3.5 sm:px-7 text-center align-middle font-sans text-[0.50rem] sm:text-sm font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">Stok Habis
+                            </button>
                         @endif
                     </div>
                 </div>

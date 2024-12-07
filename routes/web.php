@@ -6,9 +6,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\TransactionController;
-
-
-
 use Illuminate\Support\Facades\Route;
 
 // Page Auth (Login / Register)
