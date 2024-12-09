@@ -7,7 +7,7 @@
     </div>
     @foreach ($transaction as $see)
         <div class="flex items-center justify-center mt-8">
-            <div class="card bg-gray-200/60 w-[1130px] h-[230px] border border-gray-600 shadow-lg shadow-black/20 backdrop-blur-md rounded-xl text-center cursor-pointer transition-all duration-500 select-none font-bold text-black hover:border-black hover:scale-[1.01] active:scale-95 active:rotate-1">
+            <div class="card bg-gray-200/60 w-[1130px] h-[230px] border border-gray-600 shadow-lg shadow-black/20 backdrop-blur-md rounded-2xl text-center cursor-pointer transition-all duration-500 select-none font-bold text-black hover:border-black hover:scale-[1.01] active:scale-95 active:rotate-1">
                 @if ($see->transaction_status == 'pending')
                     <div class="w-[1128px] h-[40px] bg-gray-400 top-0 rounded-t-xl">
                         <h4 class="items-center justify-center text-base font-medium pt-2">PENDING</h4>
@@ -100,7 +100,7 @@
                         <img src="{{ asset('uploads/payment/' . $see->proof_of_payment) }}" width="100%">
                     </div>
                     <div class="flex items-center shadow-2xl p-4 md:p-5 border-t bg-white border-gray-200 rounded-b-3xl dark:border-gray-600">
-                        <button data-modal-hide="{{ $modalId }}" type="button" class="h-12 text-white w-full transition-colors duration-200 bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-duration-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600">TUTUP</button>
+                        <button data-modal-hide="{{ $modalId }}" type="button" class="w-full py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-green-800 rounded-3xl hover:shadow-md hover:shadow-slate-600 border-2 border-green-800 duration-300 focus:z-10 focus:ring-4 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">TUTUP</button>
                     </div>
                 </div>
             </div>
@@ -252,7 +252,7 @@
 
                     </div>
                     <div class="flex items-center p-4 md:p-5 border-t shadow-2xl border-gray-200 dark:border-gray-600">
-                        <button data-modal-hide="{{ $modalDetailId }}" type="button" class="h-12 text-white w-full transition-colors duration-200 bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-duration-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600">TUTUP</button>
+                        <button data-modal-hide="{{ $modalDetailId }}" type="button" class="w-full py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-green-800 rounded-3xl hover:shadow-md hover:shadow-slate-600 border-2 border-green-800 duration-300 focus:z-10 focus:ring-4 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">TUTUP</button>
                     </div>
                 </div>
             </div>
