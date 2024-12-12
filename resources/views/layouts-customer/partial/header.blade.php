@@ -67,9 +67,4 @@
             </div>
         </div>
     </div>
-    {{-- Tampilan Header --}}
-
-    {{-- Tampilan Mobile --}}
-    @include('layouts-customer/partial/mobile-navbar')
-    <!--? Navbar -->
 </header>

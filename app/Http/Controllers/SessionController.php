@@ -62,14 +62,6 @@ class SessionController extends Controller
             'email' => 'required|unique:users',
             'password' => 'required',
         ]);
-        // $duplicateName = User::where("name", $request->name);
-        // if ($duplicateName) {
-        //     $message = [
-        //         'type-message' => 'warning',
-        //         'message' => 'Nama anda sudah terdaftar !'
-        //     ];
-        //     return redirect()->back()->withInput()->with($message);
-        // }
 
         $validation['password'] = bcrypt($request->password);
 
@@ -144,7 +136,7 @@ class SessionController extends Controller
             }
 
             // Simpan Avatar yang baru
-            $file_name = $request->file('avatar')->getClientOriginalName();
+            $file_name = rand(1000, 9999) . '.' . date('ymdHis') . '.' . $request->file('avatar')->getClientOriginalName();
             $request->file('avatar')->move(public_path('uploads/avatar/'), $file_name);
             $validation['avatar'] = $file_name;
         }

@@ -83,7 +83,6 @@
     </div>
 
     <div class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <!-- Table 1: Data Transaksi yang Terbaru -->
         <div class="bg-white shadow-md rounded-3xl p-6">
             <div class="flex justify-between">
                 <h2 class="text-xl font-semibold mb-4">Data Transaksi yang Terbaru</h2>
@@ -166,7 +165,6 @@
             </div>
         </div>
 
-        <!-- Table 2: Table Kanan -->
         <div class="bg-white shadow-md rounded-3xl p-6">
             <div class="flex justify-between">
                 <h2 class="text-xl font-semibold mb-4">Data Driver</h2>
@@ -185,17 +183,19 @@
                     <tbody>
                         @foreach ($driverData as $see)
                             <tr>
-                                <th class="flex gap-3 px-6 py-4 font-normal text-gray-900 items-center justify-center">
-                                    <div class="relative h-10 w-10">
-                                        @if (empty($see->avatar))
-                                            <img class="h-full w-full rounded-full object-cover object-center" src="{{ asset('uploads/avatar/empty-avatar.webp  ') }}" alt="" />
-                                        @else
-                                            <img class="h-full w-full rounded-full object-cover object-center" src="{{ asset('uploads/avatar/' . $see->avatar) }}" alt="" />
-                                        @endif
-                                    </div>
-                                    <div class="text-sm">
-                                        <div class="font-medium text-gray-700">{{ $see->name }}</div>
-                                        <div class="text-gray-400">{{ $see->email }}</div>
+                                <th class="px-6 py-4 border-b text-center font-normal text-gray-900 items-center justify-center">
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="relative h-10 w-10">
+                                            @if (empty($see->avatar))
+                                                <img class="h-full w-full rounded-full object-cover object-center" src="{{ asset('uploads/avatar/empty-avatar.webp') }}" alt="" />
+                                            @else
+                                                <img class="h-full w-full rounded-full object-cover object-center" src="{{ asset('uploads/avatar/' . $see->avatar) }}" alt="" />
+                                            @endif
+                                        </div>
+                                        <div class="text-sm">
+                                            <div class="font-medium text-gray-700">{{ $see->name }}</div>
+                                            <div class="text-gray-400">{{ $see->email }}</div>
+                                        </div>
                                     </div>
                                 </th>
                                 @if (empty($see->address))

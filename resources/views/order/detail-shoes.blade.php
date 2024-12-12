@@ -96,10 +96,15 @@
                         </div>
                     </div>
                     <div class="p-3 pt-2 sm:p-6 sm:pb-3 mb-2">
-                        <a href="{{ route('order-detail.view', $see2->id) }}">
-                            <button class="block w-full select-none rounded-3xl bg-green-800 py-1.5 px-3 sm:py-3.5 sm:px-7 text-center align-middle font-sans text-[0.50rem] sm:text-sm font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">Lihat Detail
+                        @if ($see2->stock > 0)
+                            <a href="{{ route('order-detail.view', $see2->id) }}">
+                                <button class="block w-full select-none rounded-3xl bg-green-800 py-1.5 px-3 sm:py-3.5 sm:px-7 text-center align-middle font-sans text-[0.50rem] sm:text-sm font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">Lihat Detail
+                                </button>
+                            </a>
+                        @else
+                            <button class="block w-full select-none rounded-3xl bg-red-600 py-1.5 px-3 sm:py-3.5 sm:px-7 text-center align-middle font-sans text-[0.50rem] sm:text-sm font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">Stok Habis
                             </button>
-                        </a>
+                        @endif
                     </div>
                 </div>
             @endforeach
