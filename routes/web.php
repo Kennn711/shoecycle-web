@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 // Page Auth (Login / Register)
 Route::get("/", [SessionController::class, 'loginPage'])->name("login");
 
-// Validasi
+// Validasi AUTH
 Route::post("/register", [SessionController::class, 'register'])->name("auth.register");
 Route::post("/login", [SessionController::class, "login"])->name("auth.login");
 

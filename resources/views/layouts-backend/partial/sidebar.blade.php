@@ -16,7 +16,7 @@
     <!-- MAX SIDEBAR-->
     <div class= "max hidden text-white mt-20 flex-col space-y-2 w-full h-[calc(100vh)]">
         @if (auth()->user()->role == 'admin')
-            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            <div class =  "hover:ml-4 {{ Route::is('page.dashboard') ? 'ml-4 text-purple-500' : '' }} w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
                 <i class="fi-br-dashboard-panel w-4 h-5"></i>
                 <div>
                     <a href="{{ route('page.dashboard') }}">
@@ -24,7 +24,7 @@
                     </a>
                 </div>
             </div>
-            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            <div class =  "hover:ml-4 {{ Route::is('shoes.index') || Route::is('shoes.edit') || Route::is('shoes.create') ? 'ml-4 text-purple-500' : '' }} w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
                 <i class="fi-br-boot-heeled w-4 h-5"></i>
                 <div>
                     <a href="{{ route('shoes.index') }}">
@@ -32,15 +32,15 @@
                     </a>
                 </div>
             </div>
-            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
-                <i class="bi bi-receipt w-4 h-5"></i>
+            <div class =  "hover:ml-4 {{ Route::is('transaction.index') ? 'ml-4 text-purple-500' : '' }} w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+                <i class="bi bi-receipt w-4 h-[24px]"></i>
                 <div>
                     <a href="{{ route('transaction.index') }}">
                         Data Transaksi
                     </a>
                 </div>
             </div>
-            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            <div class =  "hover:ml-4 {{ Route::is('driver.index') || Route::is('driver.create') || Route::is('driver.edit') ? 'ml-4 text-purple-500' : '' }} w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
                 <i class="fi-br-employee-man w-4 h-5"></i>
                 <div>
                     <a href="{{ route('driver.index') }}">
@@ -51,7 +51,7 @@
         @endif
 
         @if (auth()->user()->role == 'driver')
-            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            <div class =  "hover:ml-4 {{ Route::is('ordershoes.view') ? 'ml-4 text-purple-500' : '' }} w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
                 <i class="bi bi-card-checklist w-4 h-6"></i>
                 <div>
                     <a href="{{ route('ordershoes.view') }}">
@@ -59,7 +59,7 @@
                     </a>
                 </div>
             </div>
-            <div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            <div class =  "hover:ml-4 {{ Route::is('myorder.view') ? 'ml-4 text-purple-500' : '' }} w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
                 <i class="bi bi-journal-bookmark-fill w-4 h-6"></i>
                 <div>
                     <a href="{{ route('myorder.view') }}">
@@ -72,22 +72,22 @@
     <!-- MINI SIDEBAR-->
     <div class= "mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
         @if (auth()->user()->role == 'admin')
-            <div class= "hover:ml-4 justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+            <div class= "hover:ml-4 {{ Route::is('page.dashboard') ? 'ml-4 text-purple-500' : '' }} justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
                 <a href="{{ route('page.dashboard') }}">
                     <i class="fi-br-dashboard-panel text-2xl w-4 h-7"></i>
                 </a>
             </div>
-            <div class= "hover:ml-4 justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+            <div class= "hover:ml-4 {{ Route::is('shoes.index') || Route::is('shoes.create') || Route::is('shoes.edit') ? 'ml-4 text-purple-500' : '' }} justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
                 <a href="{{ route('shoes.index') }}">
                     <i class="fi-br-boot-heeled text-2xl w-4 h-7"></i>
                 </a>
             </div>
-            <div class= "hover:ml-4 justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+            <div class= "hover:ml-4 {{ Route::is('transaction.index') ? 'ml-4 text-purple-500' : '' }} justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
                 <a href="{{ route('transaction.index') }}">
                     <i class="bi bi-receipt text-2xl w-4 h-7"></i>
                 </a>
             </div>
-            <div class= "hover:ml-4 justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+            <div class= "hover:ml-4 {{ Route::is('driver.index') || Route::is('driver.create') || Route::is('driver.edit') ? 'ml-4 text-purple-500' : '' }} justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
                 <a href="{{ route('driver.index') }}">
                     <i class="fi-br-employee-man text-2xl w-4 h-7"></i>
                 </a>
@@ -95,12 +95,12 @@
         @endif
 
         @if (auth()->user()->role == 'driver')
-            <div class= "hover:ml-4 justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+            <div class= "hover:ml-4 {{ Route::is('ordershoes.view') ? 'ml-4 text-purple-500' : '' }} justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
                 <a href="{{ route('ordershoes.view') }}">
                     <i class="bi bi-card-checklist text-2xl w-4 h-7"></i>
                 </a>
             </div>
-            <div class= "hover:ml-4 justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+            <div class= "hover:ml-4 {{ Route::is('myorder.view') ? 'ml-4 text-purple-500' : '' }} justify-end pr-3.5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
                 <a href="{{ route('myorder.view') }}">
                     <i class="bi bi-journal-bookmark-fill text-2xl w-4 h-7"></i>
                 </a>

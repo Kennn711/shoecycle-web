@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{-- Favivon --}}
     <link rel="shortcut icon" href="{{ asset('eCommerce_tailwind_template-master') }}/assets/images/logo/favicon.ico" type="image/x-icon" />
+
     {{-- Link Icon --}}
     <link rel="stylesheet" href="{{ asset('assets/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/uicons-bold-rounded/css/uicons-bold-rounded.css') }}">
+
     {{-- Template CSS --}}
     <link rel="stylesheet" href="{{ asset('eCommerce_tailwind_template-master') }}/assets/style.css" />
     <link rel="stylesheet" href="{{ asset('assets/sweetalert/sweetalert.min.css') }}">
@@ -32,8 +34,6 @@
     @include('layouts-customer/partial/header')
     @yield('content-frontend')
 
-    {{-- @include('layouts-customer/partial/footer') --}}
-    <!--! icons -->
     <script src="{{ asset('assets/sweetalert/sweetalert.min.js') }}"></script>
     @if (session('message'))
         <script>

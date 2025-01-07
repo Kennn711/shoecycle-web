@@ -187,16 +187,13 @@
         @else
             <footer class="footer bg-[#212121] w-full mt-auto p-5">
     @endif
-    <div class="flex items-center pt-1 md:pt-3 xl:ml-12">
-        <img src="uploads/logo/ShoeCycle (putih).png" alt="Logo" class="h-7 sm:h-12 w-auto sm:px-1.5 px-0.5 ml-0 md:ml-7 lg:ml-5">
-        <p class="text-xs sm:text-2xl font-semibold text-white">ShoeCycle</p>
-    </div>
+    <img src="{{ asset('uploads/logo/shoecycle-new-logo.png') }}" class="w-[10rem] ml-[125px]" alt="">
 
-    <div class="flex justify-between mt-5 xl:mr-12 xl:ml-12">
+    <div class="flex justify-between mt-2 xl:mr-12 xl:ml-12">
         <div class="ml-1 sm:ml-4 md:ml-12 lg:ml-20 mb-2 sm:mb-3">
-            <h1 class="text-white text-[0.50rem] sm:text-base font-bold">Layanan Pengaduan Konsumen ShoeCycle</h1>
-            <p class="mt-2 text-white text-[0.50rem] sm:text-sm"><a href="#">Email: shoecycle@gmail.com</a></p>
-            <p class="text-white text-[0.50rem] sm:text-sm"><a href="https://wa.me/6285704637649" target="_blank">WhatsApp: +62 857 0463 7649</a></p>
+            <h1 class="text-white text-[0.50rem] sm:text-base font-bold">Layanan Pengaduan Konsumen</h1>
+            <p class="mt-2 text-white text-[0.50rem] sm:text-sm"><a href="#" class="hover:text-green-400">Email: shoescycle@gmail.com</a></p>
+            <p class="text-white text-[0.50rem] sm:text-sm"><a href="https://wa.me/6285704637649" class="hover:text-green-400" target="_blank">WhatsApp: +62 857 0463 7649</a></p>
 
             <!-- Sosial Media -->
             <p class="mt-2 sm:mt-6 md:mt-9 text-white text-[0.50rem] md:text-base font-bold">Temukan Kami</p>

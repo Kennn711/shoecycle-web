@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="gap-4 bg-gray-100 shadow-md flex flex-col sm:flex-row w-full items-center justify-between p-6 md:px-24">
-            <h1 class="font-semibold text-4xl text-gray-600">ShoeCycle</h1>
+            <img src="{{ asset('uploads/logo/shoecycle-new-logo.png') }}" class="w-[12rem]" alt="">
             <form class="relative w-full sm:w-3/5">
                 <div class="desktopNavbar">
                     <nav class="my-4 hidden lg:flex justify-center">

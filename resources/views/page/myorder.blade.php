@@ -81,7 +81,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <div class="flex flex-col space-y-6">
+                                                            <div class="flex flex-col space-y-6 mb-4">
                                                                 <div class="flex justify-between">
                                                                     <div class="flex items-start">
                                                                         <i class="bi bi-person-badge-fill mr-4 text-4xl"></i>
@@ -91,8 +91,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="flex items-start">
-                                                                        <i class="bi bi-cash-stack mr-4 text-4xl"></i>
-                                                                        <div>
+                                                                        <i class="bi bi-cash-stack mr-12 text-4xl"></i>
+                                                                        <div class="mr-7">
                                                                             <h1 class="text-lg font-bold">Total Harga</h1>
                                                                             <p class="text-gray-600">Rp {{ number_format($see->total, 0, ',', '.') }}</p>
                                                                         </div>
@@ -107,7 +107,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="flex items-start">
-                                                                        <i class="bi bi-calendar2-check mr-4 text-4xl"></i>
+                                                                        <i class="bi bi-calendar2-check mr-8 text-4xl"></i>
                                                                         <div>
                                                                             <h1 class="text-lg font-bold">Tanggal Diterima</h1>
                                                                             @if (empty($see->received_date))
@@ -139,7 +139,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="flex items-start">
-                                                                        <i class="bi bi-truck mr-4 text-4xl"></i>
+                                                                        <i class="bi bi-truck mr-6 text-4xl"></i>
                                                                         <div>
                                                                             <h1 class="text-lg font-bold">Status Pengiriman</h1>
                                                                             @if ($see->delivery_status == 'shipped')
@@ -168,6 +168,13 @@
                                                                             @if (!empty($see->driver_id))
                                                                                 <p class="text-gray-600">{{ $see->driver->name }}</p>
                                                                             @endif
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flex items-start">
+                                                                        <i class="fi-br-land-layer-location mr-16 text-4xl"></i>
+                                                                        <div class="mr-14">
+                                                                            <h1 class="text-lg font-bold">Alamat</h1>
+                                                                            <p class="text-gray-600">{{ $see->user->address }}</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>

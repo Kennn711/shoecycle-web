@@ -13,6 +13,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('uploads/logo/amogus.png') }}">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 

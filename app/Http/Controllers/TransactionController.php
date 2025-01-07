@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Shoes;
 use App\Models\TransactionDetail;
-use App\Models\Wallet;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,10 +84,6 @@ class TransactionController extends Controller
             ];
             return redirect()->route("complete.profile")->with($message);
         }
-        // || empty($user->address)) {
-
-
-        // membuat kode resi
 
         // Menghitung total dari keranjang
         $total = array_sum(array_map(function ($item) {

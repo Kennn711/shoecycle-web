@@ -61,7 +61,6 @@
                                         };
                                         reader.readAsDataURL(file);
 
-                                        // Tampilkan nama file di bawah gambar
                                         fileNameDisplay.textContent = file.name;
                                     } else {
                                         previewImg.src = 'https://images.pexels.com/photos/2690323/pexels-photo-2690323.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
