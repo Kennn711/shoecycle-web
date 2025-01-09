@@ -170,11 +170,13 @@
                                                                             @endif
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                                <div class="flex justify-between">
                                                                     <div class="flex items-start">
-                                                                        <i class="fi-br-land-layer-location mr-16 text-4xl"></i>
-                                                                        <div class="mr-14">
+                                                                        <i class="fi-br-land-layer-location mr-4 mt-2 text-4xl"></i>
+                                                                        <div>
                                                                             <h1 class="text-lg font-bold">Alamat</h1>
-                                                                            <p class="text-gray-600">{{ $see->user->address }}</p>
+                                                                            <p class="text-gray-600 max-w-[30rem]">{{ $see->user->address }}</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
