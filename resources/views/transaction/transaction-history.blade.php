@@ -45,8 +45,19 @@
                 <div class="text-left ml-3 mt-3">
                     @php $modalId = "modal-" . $see->id; @endphp
                     <button data-modal-target="{{ $modalId }}" data-modal-toggle="{{ $modalId }}" class="relative overflow-hidden rounded-lg h-12 group hover:shadow-lg hover:scale-105 transition duration-500 before:absolute before:inset-0 before:rounded-lg bg-gray-400">
-                        <span class="relative text-white font-bold px-8 py-8"> Bukti pembayaran </span>
+                        <span class="relative text-white font-bold px-6 py-8"> Bukti Pembayaran </span>
                     </button>
+
+                    @php $modalDelivery = "modalDelivery" . $see->id; @endphp
+                    @if (!empty($see->proof_of_delivery))
+                        <button data-modal-target="{{ $modalDelivery }}" data-modal-toggle="{{ $modalDelivery }}" class="relative ml-2 overflow-hidden rounded-lg h-12 group hover:shadow-lg hover:scale-105 transition duration-500 before:absolute before:inset-0 before:rounded-lg bg-gray-400">
+                            <span class="relative text-white font-bold px-6 py-8"> Bukti Pengiriman </span>
+                        </button>
+                    @else
+                        <button disabled class="relative ml-2 overflow-hidden rounded-lg h-12 group hover:shadow-lg hover:scale-105 transition duration-500 before:absolute before:inset-0 before:rounded-lg bg-gray-400">
+                            <span class="relative text-white font-bold px-6 py-8"> Belum Dikirim </span>
+                        </button>
+                    @endif
 
                     @php $modalDetailId = "modaldetail-" . $see->id; @endphp
                     <button data-modal-target="{{ $modalDetailId }}" data-modal-toggle="{{ $modalDetailId }}" class="relative overflow-hidden ml-3 rounded-lg h-12 group hover:shadow-lg hover:scale-105 transition duration-500 before:absolute before:inset-0 before:rounded-lg bg-gray-400">
@@ -101,6 +112,22 @@
                     </div>
                     <div class="flex items-center shadow-2xl p-4 md:p-5 border-t bg-white border-gray-200 rounded-b-3xl dark:border-gray-600">
                         <button data-modal-hide="{{ $modalId }}" type="button" class="w-full py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-green-800 rounded-3xl hover:shadow-md hover:shadow-slate-600 border-2 border-green-800 duration-300 focus:z-10 focus:ring-4 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">TUTUP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="{{ $modalDelivery }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                <div class="relative rounded-lg dark:bg-gray-700">
+                    <div class="flex items-center justify-between p-4 md:p-5 border-blue-950 rounded-t-3xl bg-green-700 dark:border-gray-600">
+                        <h3 class="text-xl font-semibold uppercase text-white dark:text-white">Bukti Pengiriman {{ $see->code }}</h3>
+                    </div>
+                    <div class="p-4 md:p-5 space-y-4 bg-gray-100 drop-shadow-md">
+                        <img src="{{ asset('uploads/delivery/' . $see->proof_of_delivery) }}" width="100%">
+                    </div>
+                    <div class="flex items-center shadow-2xl p-4 md:p-5 border-t bg-white border-gray-200 rounded-b-3xl dark:border-gray-600">
+                        <button data-modal-hide="{{ $modalDelivery }}" type="button" class="w-full py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-green-800 rounded-3xl hover:shadow-md hover:shadow-slate-600 border-2 border-green-800 duration-300 focus:z-10 focus:ring-4 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">TUTUP</button>
                     </div>
                 </div>
             </div>

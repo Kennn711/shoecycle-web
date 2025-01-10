@@ -182,6 +182,7 @@ class TransactionController extends Controller
 
             $file_name = rand(1000, 9999) . date("ymdHis") . '.' . $request->file('proof_of_delivery')->getClientOriginalName();
             $request->file('proof_of_delivery')->move(public_path('uploads/delivery/'), $file_name);
+            $transaction->proof_of_delivery = $file_name;
 
             $transaction->save();
 

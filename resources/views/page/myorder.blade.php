@@ -25,6 +25,7 @@
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Total</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Kode Resi</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Detail</th>
+                    <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Bukti Pengiriman</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Status Transaksi</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Status Pengiriman</th>
                 </tr>
@@ -214,6 +215,46 @@
                                 </div>
                             @endpush
                         </td>
+                        <td class="px-6 align-middle text-center py-4">
+                            @php $modalDeliveryId = "modaldelivery-" . $see->id; @endphp
+
+                            @if (!empty($see->proof_of_delivery))
+                                <button data-modal-target="{{ $modalDeliveryId }}" data-modal-toggle="{{ $modalDeliveryId }}" class="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-[#1E293B] text-[#1E293B] hover:text-white">
+                                    <span class="absolute w-64 h-0 transition-all duration-500 origin-center rotate-45 -translate-x-20 bg-[#1E293B] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+                                    <span class="relative text-[#1E293B] transition duration-500 group-hover:text-white ease">
+                                        <i class="bi bi-images text-xl"></i>
+                                    </span>
+                                </button>
+                            @else
+                                <span class="inline-flex items-center text-sm font-semibold text-[#1E293B]">
+                                    Belum Ada Bukti Pengiriman
+                                </span>
+                            @endif
+
+                            @push('modal')
+                                <div id="{{ $modalDeliveryId }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                                        <!-- Modal content -->
+                                        <div class="relative bg-white rounded-3xl shadow dark:bg-gray-700">
+                                            <!-- Modal header -->
+                                            <div class="flex items-center justify-between bg-[#1E293B] p-4 md:p-5 border-b rounded-t-3xl dark:border-gray-600">
+                                                <h3 class="text-xl font-semibold text-white dark:text-white">
+                                                    Bukti Pengiriman {{ $see->code }}
+                                                </h3>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="bg-gray-100 p-4 md:p-5 space-y-4">
+                                                <img src="{{ asset('uploads/delivery/' . $see->proof_of_delivery) }}" width="100%">
+                                            </div>
+                                            <!-- Modal footer -->
+                                            <div class="flex items-center justify-center p-4 md:p-5 border-t rounded-b dark:border-gray-600">
+                                                <button data-modal-hide="{{ $modalDeliveryId }}" type="button" class="py-2.5 px-5 w-full text-sm font-medium text-white focus:outline-none bg-[#1E293B] rounded-3xl duration-300 focus:z-10 hover:shadow-md hover:shadow-slate-600 focus:ring-4 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">TUTUP</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endpush
+                        </td>
                         <td class="px-6 py-4 align-middle text-center">
                             @if ($see->transaction_status == 'pending')
                                 <div class="flex justify-center space-x-2">
@@ -282,15 +323,6 @@
                                             Dikirim
                                         </span>
                                     </button>
-                                    {{-- <form action="{{ route('delivery.status', $see->id) }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="delivery_status" value="delivered">
-                                        <button type="submit">
-                                            <span class="inline-flex items-center rounded-full bg-green-300 hover:bg-green-400 transition-colors duration-300 px-6 py-2 text-sm font-semibold text-[#1E293B]">
-                                                Tandai Terkirim
-                                            </span>
-                                        </button>
-                                    </form> --}}
                                     <button type="button" data-modal-target="modalUploadProof-{{ $see->id }}" data-modal-toggle="modalUploadProof-{{ $see->id }}" class="inline-flex items-center rounded-full bg-[#1E293B] hover:bg-[#1E293B] transition-colors duration-300 px-6 py-2 text-sm font-semibold text-white">
                                         Kirim Bukti
                                     </button>
