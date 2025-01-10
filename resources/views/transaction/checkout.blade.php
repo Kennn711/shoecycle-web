@@ -1,6 +1,6 @@
 @extends('layouts-customer.index')
 
-@section('title-frontend', 'ShoeCycle | Keranjang')
+@section('title-frontend', 'ShoeCycle | Checkout')
 @section('content-frontend')
     <div class="font-[sans-serif] bg-white">
         <div class="flex max-sm:flex-col gap-12 max-lg:gap-4 h-full">
@@ -41,49 +41,57 @@
 
             <div class="max-w-4xl w-full h-max rounded-md px-4 py-8 sticky top-0">
                 <h2 class="text-2xl font-bold text-gray-800">Selesaikan Pesanan Anda</h2>
-                <form class="mt-8">
+                <div class="mt-8">
                     @if (!empty(auth()->user()->address || !empty(auth()->user()->no_hp)))
-                        <div class="">
-                            <div class="flex items-center justify-center w-full mb-4">
-                                <label for="file-upload" class="flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <svg aria-hidden="true" class="w-8 h-8 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V12m0 0V8m0 4H3.5a2.5 2.5 0 00-2.5 2.5V17.5A2.5 2.5 0 003.5 20H5m14-4v4a2.5 2.5 0 002.5 2.5H20m-4-4v-4a2.5 2.5 0 00-2.5-2.5H12"></path>
-                                        </svg>
-                                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                        <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                                        <p id="file-name" class="text-sm text-gray-500 mt-2"></p>
-                                    </div>
-                                    <input id="file-upload" name="proof_of_payment" type="file" class="hidden" onchange="showFileName()">
-                                </label>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-gray-700 mb-2 block">Alamat</label>
+                                <input type="text" disabled value="{{ auth()->user()->address }}" placeholder="Alamat" class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md border-2 focus:border-green-700" />
                             </div>
+                            <div>
+                                <label class="text-gray-700 mb-2 block">Nomor Telepon</label>
+                                <input type="text" disabled value="{{ auth()->user()->no_hp }}" placeholder="No telepon" class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md border-2 focus:border-green-700" />
+                            </div>
+                        </div>
+                    @else
+                        <div class="flex flex-col items-center">
+                            <img src="{{ asset('uploads/ilustration/empty-address-tlp.png') }}" alt="" class="w-[30rem] h-[30rem]">
+                            <p class="text-red-500 text-center font-bold">Data Diri anda tidak Lengkap !</p>
+                            <!-- Tombol untuk membuka modal -->
+                            <button data-modal-target="demo-popup" data-modal-toggle="demo-popup" type="button" class="bg-green-700 text-white px-4 py-2 rounded mt-4 open-modal">Lengkapi</button>
                         </div>
                     @endif
 
                     <div class="mt-8">
-                        @if (!empty(auth()->user()->address || !empty(auth()->user()->no_hp)))
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <input type="text" placeholder="Alamat" class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md border-2 focus:border-green-700" />
+                        @if (!empty(auth()->user()->address && !empty(auth()->user()->no_hp)))
+                            <label class="text-gray-700 mb-2 block">Kirim Bukti Pembayaran</label>
+                            <form action="{{ route('checkout.detail') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @foreach ($cart as $id => $item)
+                                    <input type="hidden" name="shoes_id[]" value="{{ $id }}">
+                                @endforeach
+                                <div class="">
+                                    <div class="flex items-center justify-center w-full mb-4">
+                                        <label for="file-upload" class="flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                <svg aria-hidden="true" class="w-8 h-8 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V12m0 0V8m0 4H3.5a2.5 2.5 0 00-2.5 2.5V17.5A2.5 2.5 0 003.5 20H5m14-4v4a2.5 2.5 0 002.5 2.5H20m-4-4v-4a2.5 2.5 0 00-2.5-2.5H12"></path>
+                                                </svg>
+                                                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                                <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                                <p id="file-name" class="text-sm text-gray-500 mt-2"></p>
+                                            </div>
+                                            <input id="file-upload" name="proof_of_payment" type="file" class="hidden" onchange="showFileName()">
+                                        </label>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input type="text" placeholder="No telepon" class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md border-2 focus:border-green-700" />
+                                <div class="flex gap-4 max-md:flex-col mt-8">
+                                    <button type="submit" class="rounded-md px-4 py-2.5 w-full text-sm tracking-wide border-2 border-green-700 text-black hover:text-white hover:bg-green-700 transition delay-100 duration-100 ease-in-out">Kirim</button>
                                 </div>
-                            </div>
-                            <div class="flex gap-4 max-md:flex-col mt-8">
-                                <button type="button" class="rounded-md px-4 py-2.5 w-full text-sm tracking-wide border-2 border-green-700 text-black hover:text-white hover:bg-green-700 transition delay-100 duration-100 ease-in-out">Complete Purchase</button>
-                            </div>
-                        @else
-                            <div class="flex flex-col items-center">
-                                <img src="{{ asset('uploads/ilustration/empty-address-tlp.png') }}" alt="" class="w-[30rem] h-[30rem]">
-                                <p class="text-red-500 text-center font-bold">Data Diri anda tidak Lengkap !</p>
-                                <!-- Tombol untuk membuka modal -->
-                                <button data-modal-target="demo-popup" data-modal-toggle="demo-popup" type="button" class="bg-green-700 text-white px-4 py-2 rounded mt-4 open-modal">Lengkapi</button>
-                            </div>
+                            </form>
                         @endif
-
                     </div>
-                </form>
+                </div>
             </div>
             <div class="pt-4 mt-4">
                 <h1 class="text-2xl font-bold text-gray-800 pl-4">Rekening yang tersedia :</h1>
@@ -137,12 +145,19 @@
 
                         <!-- Tombol kiri dan kanan -->
                         <div class="flex justify-between mt-4">
-                            <button type="submit" class="bg-green-700 text-white px-4 py-2 rounded">Ubah</button>
-                            <button data-modal-hide="demo-popup" type="button" class="bg-red-500 text-white px-4 py-2 rounded close-modal">Tutup</button>
+                            <button type="submit" class="bg-green-700 text-white px-4 py-2 rounded-xl">Ubah</button>
+                            <button data-modal-hide="demo-popup" type="button" class="bg-red-500 text-white px-4 py-2 rounded-xl close-modal">Tutup</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function showFileName() {
+            const input = document.getElementById('file-upload');
+            const fileNameDisplay = document.getElementById('file-name');
+            fileNameDisplay.textContent = input.files.length > 0 ? input.files[0].name : 'No file chosen';
+        }
+    </script>
 @endsection
