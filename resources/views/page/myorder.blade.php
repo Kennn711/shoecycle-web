@@ -282,7 +282,7 @@
                                             Dikirim
                                         </span>
                                     </button>
-                                    <form action="{{ route('delivery.status', $see->id) }}" method="POST">
+                                    {{-- <form action="{{ route('delivery.status', $see->id) }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="delivery_status" value="delivered">
                                         <button type="submit">
@@ -290,7 +290,40 @@
                                                 Tandai Terkirim
                                             </span>
                                         </button>
-                                    </form>
+                                    </form> --}}
+                                    <button type="button" data-modal-target="modalUploadProof-{{ $see->id }}" data-modal-toggle="modalUploadProof-{{ $see->id }}" class="inline-flex items-center rounded-full bg-[#1E293B] hover:bg-[#1E293B] transition-colors duration-300 px-6 py-2 text-sm font-semibold text-white">
+                                        Kirim Bukti
+                                    </button>
+
+                                    @push('modal')
+                                        <div id="modalUploadProof-{{ $see->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                                                <!-- Modal content -->
+                                                <div class="relative bg-white rounded-3xl shadow dark:bg-gray-700">
+                                                    <!-- Modal header -->
+                                                    <div class="flex items-center justify-between bg-[#1E293B] p-4 md:p-5 border-b rounded-t-3xl dark:border-gray-600">
+                                                        <h3 class="text-xl font-semibold text-white dark:text-white">
+                                                            Kirim Bukti Pengiriman
+                                                        </h3>
+                                                    </div>
+                                                    <!-- Modal body -->
+                                                    <div class="bg-gray-100 p-4 md:p-5 space-y-4">
+                                                        <form action="{{ route('delivery.status', $see->id) }}" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <input type="hidden" name="delivery_status" value="delivered">
+                                                            <div class="mb-4">
+                                                                <label for="proof_of_delivery" class="block text-sm font-medium text-gray-700">Bukti Pengiriman</label>
+                                                                <input type="file" name="proof_of_delivery" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            </div>
+                                                            <div class="flex items-center justify-center p-4 md:p-5 border-t rounded-b dark:border-gray-600">
+                                                                <button type="submit" class="w-full py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-[#1E293B] rounded-3xl hover:shadow-md hover:shadow-slate-600 duration-300 focus:z-10 focus:ring-4 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">KIRIM</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endpush
                                 </div>
                             @endif
 

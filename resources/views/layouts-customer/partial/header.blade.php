@@ -12,26 +12,9 @@
             </div>
         </div>
         <div class="gap-4 bg-gray-100 shadow-md flex flex-col sm:flex-row w-full items-center justify-between p-6 md:px-24">
-            <img src="{{ asset('uploads/logo/shoecycle-new-logo.png') }}" class="w-[12rem]" alt="">
-            <form class="relative w-full sm:w-3/5">
-                <div class="desktopNavbar">
-                    <nav class="my-4 hidden lg:flex justify-center">
-                        <ul class="desktopNavbarUl flex justify-center items-center gap-12 font-sm font-bold text-gray-600">
-                            <li class="nav_items relative">
-                                <a href="{{ route('order.view') }}">BELI SEPATU</a>
-                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-900  transition-all ease-in-out"></span>
-                            </li>
-                            <li class="nav_items relative">
-                                <a href="{{ route('transaction-customer.index') }}">RIWAYAT TRANSAKSI</a>
-                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-900  transition-all ease-in-out"></span>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <label class="absolute right-2 top-2" for="search">
-                    <i class="fa-solid fa-magnifying-glass cursor-pointer"></i>
-                </label>
-            </form>
+            <a href="{{ route('order.view') }}">
+                <img src="{{ asset('uploads/logo/shoecycle-new-logo.png') }}" class="w-[12rem]" alt="">
+            </a>
             <div class="icons hidden mr-2 text-3xl md:flex gap-8 text-gray-600">
                 <div class="relative">
                     @if (empty(Auth::user()->avatar))
@@ -48,6 +31,7 @@
                         </div>
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
                             <li>
+                                <a href="{{ route('transaction-customer.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Pesanan</a>
                                 <a href="{{ route('complete.profile') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pengaturan Akun</a>
                             </li>
                         </ul>

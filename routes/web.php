@@ -68,3 +68,7 @@ Route::group(['middleware' => 'customer'], function () {
     Route::get("checkout", [TransactionController::class, 'checkout'])->name('checkout');
     Route::post("checkout-detail", [TransactionController::class, 'storeTransaction'])->name('checkout.detail');
 });
+
+// Route::get('/test', function () {
+//     return view('test-cart');
+// });

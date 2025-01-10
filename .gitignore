@@ -6,6 +6,7 @@
 /storage/*.key
 /public/uploads/payment/*
 /public/uploads/shoes/*
+/public/uploads/delivery/*
 /vendor
 .env
 .env.backup

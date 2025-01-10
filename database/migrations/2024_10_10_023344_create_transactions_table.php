@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId("driver_id")->nullable();
             $table->string("code");
             $table->string("proof_of_payment", 100);
+            $table->string("proof_of_delivery", 100)->nullable();
             $table->decimal("total", 10, 2);
             $table->date("payment_date");
             $table->date("received_date")->nullable();

@@ -179,6 +179,10 @@ class TransactionController extends Controller
         if ($transaction->delivery_status == 'delivered') {
             $transaction->transaction_status = 'completed';
             $transaction->received_date = now();
+
+            $file_name = rand(1000, 9999) . date("ymdHis") . '.' . $request->file('proof_of_delivery')->getClientOriginalName();
+            $request->file('proof_of_delivery')->move(public_path('uploads/delivery/'), $file_name);
+
             $transaction->save();
 
             $message = [

@@ -26,6 +26,7 @@
                     <th scope="col" class="px-6 py-4 font-medium text-gray-50">No</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Nama Customer</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Bukti Pembayaran</th>
+                    <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Bukti Pengiriman</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Total</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Kode Resi</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Detail</th>
@@ -72,6 +73,7 @@
                                 </div>
                             @endpush
                         </td>
+                        <td class="px-6 align-middle text-center py-4"></td>
                         <td class="px-6 align-middle text-center py-4">Rp {{ number_format($see->total, 0, ',', '.') }}</td>
                         <td class="px-6 align-middle text-center py-4">{{ $see->code }}</td>
                         <td class="px-6 align-middle text-center py-4">
