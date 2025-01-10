@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     // Melengkapi Profil Diri (Alamat dan No HP)
     Route::get("complete-profile", [SessionController::class, 'completeProfile'])->name('complete.profile');
     Route::put("complete-profile/store", [SessionController::class, 'storeProfile'])->name('store.profile');
+    Route::put("checkout/update", [SessionController::class, 'updateCheckout'])->name('update.profile');
 });
 
 
@@ -65,10 +66,6 @@ Route::group(['middleware' => 'customer'], function () {
     Route::post("cart/clear", [CartController::class, 'clearCart'])->name('clear.cart');
 
     // Checkout / Pembayaran
-    Route::get("checkout", [TransactionController::class, 'checkout'])->name('checkout');
+    Route::get("checkout", [CartController::class, 'checkout'])->name('checkout');
     Route::post("checkout-detail", [TransactionController::class, 'storeTransaction'])->name('checkout.detail');
 });
-
-// Route::get('/test', function () {
-//     return view('test-cart');
-// });

@@ -87,6 +87,11 @@
         }
     </script>
 
+    {{-- JQeury --}}
+    <script src="{{ asset('assets/jquery/jquery.js') }}"></script>
+
+    @stack('jquery-popup')
+
     <!--!javascript file  -->
     <script type="module" src="{{ asset('eCommerce_tailwind_template-master') }}/assets/index.js"></script>
 </body>

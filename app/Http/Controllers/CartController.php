@@ -28,6 +28,7 @@ class CartController extends Controller
                 'name' => $shoes->name,
                 'price' => $shoes->price,
                 'stock' => $shoes->stock,
+                'size' => $shoes->size,
                 'quantity' => $qty,
                 'image' => $shoes->imagedetail[0]->image
             ];
@@ -94,5 +95,13 @@ class CartController extends Controller
         ];
 
         return redirect()->back()->with($message);
+    }
+
+    public function checkout()
+    {
+        // Mengambil keranjang dari session
+        $cart = session()->get('cart', []);
+
+        return view('transaction.checkout',  compact('cart'));
     }
 }

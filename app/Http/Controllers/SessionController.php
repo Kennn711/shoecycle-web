@@ -111,8 +111,6 @@ class SessionController extends Controller
 
     function storeProfile(Request $request)
     {
-        // Validasi Input
-        // dd($request->all());
         $validation = $request->validate([
             'email'    => 'required',
             'name'     => 'required',
@@ -158,5 +156,24 @@ class SessionController extends Controller
         if (Auth::user()->role == 'driver') {
             return redirect()->route('ordershoes.view')->with($message);
         }
+    }
+
+    public function updateCheckout(Request $request)
+    {
+        $validasi = $request->validate([
+            'address' => 'required',
+            'no_hp' => 'required'
+        ]);
+
+        $user = User::find(Auth::user()->id);
+
+        $user->update($validasi);
+
+        $message = [
+            "type-message" => "success",
+            "message" => "Berhasil Mengupdate Profil"
+        ];
+
+        return redirect()->back()->with($message);
     }
 }
