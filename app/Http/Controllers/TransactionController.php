@@ -168,21 +168,36 @@ class TransactionController extends Controller
     function deliveryStatus(Request $request, $id)
     {
         $transaction = Transaction::findOrFail($id);
-        $transaction->delivery_status = $request->input('delivery_status');
-        $transaction->save();
+        $delivery_shipped = $request->input('delivery_status');
+        $delivery_delivered = $request->input('delivery');
 
-        if ($transaction->delivery_status == 'shipped') {
+        if ($delivery_shipped == 'shipped') {
+            $transaction->delivery_status = 'shipped';
             $transaction->save();
             return redirect()->route("myorder.view");
         }
 
-        if ($transaction->delivery_status == 'delivered') {
-            $transaction->transaction_status = 'completed';
-            $transaction->received_date = now();
+        if ($request->input('delivery') == 'send') {
+            if (!$request->hasFile('proof_of_delivery')) {
+                $message = [
+                    "type-message" => "error",
+                    "message" => "Bukti pengiriman harus diunggah!"
+                ];
+
+                return redirect()->back()->with($message);
+            }
+
+            $request->validate([
+                'proof_of_delivery' => 'required|image|mimes:jpeg,jpg,png,webp',
+            ]);
 
             $file_name = rand(1000, 9999) . date("ymdHis") . '.' . $request->file('proof_of_delivery')->getClientOriginalName();
             $request->file('proof_of_delivery')->move(public_path('uploads/delivery/'), $file_name);
             $transaction->proof_of_delivery = $file_name;
+
+            $transaction->transaction_status = 'completed';
+            $transaction->delivery_status = 'delivered';
+            $transaction->received_date = now();
 
             $transaction->save();
 

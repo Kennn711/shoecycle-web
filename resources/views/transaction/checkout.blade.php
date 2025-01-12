@@ -4,9 +4,9 @@
 @section('content-frontend')
     <div class="font-[sans-serif] bg-white">
         <div class="flex max-sm:flex-col gap-12 max-lg:gap-4 h-full">
-            <div class="bg-gray-100 sm:h-screen sm:sticky sm:top-0 lg:w-[370px] sm:w-[300px]">
+            <div class="ml-4 sm:h-screen sm:sticky sm:top-0 lg:w-[360px] sm:w-[300px]">
                 <div class="relative h-full">
-                    <div class="px-4 py-8 w-full sm:overflow-auto border-2 border-gray-300 rounded-t-lg mt-8 ml-4">
+                    <div class="px-4 py-8 w-full sm:overflow-auto border-2 border-gray-300 rounded-t-lg mt-8">
                         <div class="space-y-4">
 
                             <div class="items-center flex justify-center w-full h-16 bg-white border-2 border-green-600 rounded-lg">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
 
-                    <div class=" mt-0 ml-4 rounded-b-lg bg-gray-200 w-full p-4  border-2 border-gray-300">
+                    <div class=" mt-0 rounded-b-lg bg-gray-200 w-full p-4  border-2 border-gray-300">
                         <h4 class="flex flex-wrap gap-4 text-sm font-bold lg:text-base text-gray-800">Total <span class="ml-auto">
                                 Rp {{ number_format(array_sum(array_map(function ($item) {return $item['price'] * $item['quantity'];}, $cart)),0,',','.') }}
                             </span></h4>

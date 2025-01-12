@@ -243,7 +243,7 @@
                                                 </h3>
                                             </div>
                                             <!-- Modal body -->
-                                            <div class="bg-gray-100 p-4 md:p-5 space-y-4">
+                                            <div class="bg-gray-100 p-4 md:p-5 space-y-4 rounded-b-3xl">
                                                 <img src="{{ asset('uploads/delivery/' . $see->proof_of_delivery) }}" width="100%">
                                             </div>
                                             <!-- Modal footer -->
@@ -339,10 +339,10 @@
                                                         </h3>
                                                     </div>
                                                     <!-- Modal body -->
-                                                    <div class="bg-gray-100 p-4 md:p-5 space-y-4">
+                                                    <div class="bg-gray-100 rounded-b-3xl p-4 md:p-5 space-y-4">
                                                         <form action="{{ route('delivery.status', $see->id) }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
-                                                            <input type="hidden" name="delivery_status" value="delivered">
+                                                            <input type="hidden" name="delivery" value="send">
                                                             <div class="mb-4">
                                                                 <label for="proof_of_delivery" class="block text-sm font-medium text-gray-700">Bukti Pengiriman</label>
                                                                 <input type="file" name="proof_of_delivery" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
