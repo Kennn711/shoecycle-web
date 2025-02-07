@@ -22,7 +22,9 @@ return new class extends Migration
             $table->date("payment_date");
             $table->date("received_date")->nullable();
             $table->enum("transaction_status", ['pending', 'cancelled', 'completed', 'accepted'])->default('pending'); // Status Transaksi
-            $table->enum("delivery_status", ['shipped', 'delivered', 'pending'])->nullable(); // Status Pengiriman
+            $table->enum("delivery_status", ['shipped', 'delivered', 'pending', 'cancelled'])->nullable(); // Status Pengiriman
+            $table->enum("customer_request", ['none', 'cancel', 'cancelled'])->default('none')->nullable(); // Status 
+            $table->string("cancel_reason")->nullable();
             $table->timestamps();
         });
     }

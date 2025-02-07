@@ -77,8 +77,7 @@
                                                 <svg aria-hidden="true" class="w-8 h-8 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V12m0 0V8m0 4H3.5a2.5 2.5 0 00-2.5 2.5V17.5A2.5 2.5 0 003.5 20H5m14-4v4a2.5 2.5 0 002.5 2.5H20m-4-4v-4a2.5 2.5 0 00-2.5-2.5H12"></path>
                                                 </svg>
-                                                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                                <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Klik untuk unggah</span> atau seret dan lepas</p>
                                                 <p id="file-name" class="text-sm text-gray-500 mt-2"></p>
                                             </div>
                                             <input id="file-upload" name="proof_of_payment" type="file" class="hidden" onchange="showFileName()">

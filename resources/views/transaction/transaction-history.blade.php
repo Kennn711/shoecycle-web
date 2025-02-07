@@ -68,6 +68,11 @@
                     <p>Total pembayaran : Rp {{ number_format($see->total, 0, ',', '.') }}</p>
                 </div>
                 <div class="text-right mr-3 mt-12">
+                    @php $modalCancelReason = "modalCancelReason-" . $see->id; @endphp
+                    <button data-modal-target="{{ $modalCancelReason }}" data-modal-toggle="{{ $modalCancelReason }}" class="relative mr-6 hover:shadow-lg hover:scale-105 transition duration-500 before:absolute before:inset-0 before:rounded-lg overflow-hidden rounded-lg w-[210px] h-12 bg-red-500">
+                        <span class="relative text-white font-bold px-8 py-8"> Ajukan Pembatalan </span>
+                    </button>
+
                     @if ($see->transaction_status == 'pending')
                         <button disabled class="relative overflow-hidden rounded-lg w-[190px] h-12 bg-gray-400">
                             <span class="relative text-white font-bold px-8 py-8"> Belum Diproses </span>
@@ -280,6 +285,31 @@
                     </div>
                     <div class="flex items-center p-4 md:p-5 border-t shadow-2xl border-gray-200 dark:border-gray-600">
                         <button data-modal-hide="{{ $modalDetailId }}" type="button" class="w-full py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-green-800 rounded-3xl hover:shadow-md hover:shadow-slate-600 border-2 border-green-800 duration-300 focus:z-10 focus:ring-4 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">TUTUP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="{{ $modalCancelReason }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                <div class="relative rounded-lg dark:bg-gray-700">
+                    <div class="flex items-center justify-between p-4 md:p-5 border-blue-950 rounded-t-3xl bg-green-700 dark:border-gray-600">
+                        <h3 class="font-bold text-white">Pengajuan Pembatalan Pesanan {{ $see->code }}</h3>
+                    </div>
+                    <div class="p-4 md:p-5 space-y-4 bg-gray-100 rounded-b-3xl drop-shadow-md">
+                        <form action="{{ route('update.profile') }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-4">
+                                <label class="text-gray-700 mb-2 font-bold block">Alasan Pembatalan :</label>
+                                <textarea name="cancel_reason" placeholder="Masukkan Alasan Pembatalan Anda" class="px-4 py-3 bg-gray-100 transition-all duration-300 focus:ring-green-700 focus:bg-transparent text-gray-800 w-full text-sm rounded-xl border-2 focus:border-green-700 resize-none" rows="4"></textarea>
+                            </div>
+
+                            <!-- Tombol kiri dan kanan -->
+                            <div class="flex justify-between mt-4">
+                                <button type="submit" class="bg-green-700 text-white px-4 py-2 rounded-xl">Ajukan</button>
+                                <button data-modal-hide="{{ $modalCancelReason }}" type="button" class="bg-red-500 text-white px-4 py-2 rounded-xl close-modal">Batal</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
