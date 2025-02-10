@@ -296,7 +296,7 @@
                         <h3 class="font-bold text-white">Pengajuan Pembatalan Pesanan {{ $see->code }}</h3>
                     </div>
                     <div class="p-4 md:p-5 space-y-4 bg-gray-100 rounded-b-3xl drop-shadow-md">
-                        <form action="{{ route('update.profile') }}" method="POST">
+                        <form action="{{ route('cancel-transaction', $see->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-4">

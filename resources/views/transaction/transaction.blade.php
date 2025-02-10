@@ -24,7 +24,7 @@
             <thead class="bg-[#1E293B]">
                 <tr>
                     <th scope="col" class="px-6 py-4 font-medium text-gray-50">No</th>
-                    <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Nama Customer</th>
+                    <th sco~pe="col" class="px-6 py-4 font-medium text-center text-gray-50">Nama Customer</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Bukti Pembayaran</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Bukti Pengiriman</th>
                     <th scope="col" class="px-6 py-4 font-medium text-center text-gray-50">Total</th>

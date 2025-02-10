@@ -4,6 +4,9 @@
     </div>
     <div class="grow h-full flex items-center justify-center"></div>
     <div class="flex-none h-full text-center flex items-center justify-center space-x-4">
+        <button data-dropdown-toggle="invoice-dropdown" class="flex items-center justify-center bg-white transition-all duration-300 font-medium rounded-full text-lg p-2 text-center w-12 h-12">
+            <i class="bi bi-envelope-paper text-4xl"></i>
+        </button>
         <div class="relative">
             <button id="dropdownProfileButton" data-dropdown-toggle="dropdown" class="flex items-center justify-center bg-white transition-all duration-300 font-medium rounded-full text-sm p-0.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 @if (!empty(auth()->user()->avatar))
@@ -35,7 +38,9 @@
                     </li>
                 </ul>
             </div>
-
+            <div id="invoice-dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-2xl shadow w-44 dark:bg-gray-700 absolute right-0 mt-2">
+                {{-- Incoming Changes hehe --}}
+            </div>
         </div>
     </div>
 </div>

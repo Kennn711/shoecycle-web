@@ -140,6 +140,13 @@ class TransactionController extends Controller
         return redirect()->route("transaction.index")->with('success', 'Transaksi Berhasil');
     }
 
+    public function cancelTransaction(Request $request, $id)
+    {
+        $transaction = Transaction::findOrFail($id);
+
+        dd($transaction);
+    }
+
     // Switch Status Transaksi
     public function transactionStatus(Request $request, $id)
     {

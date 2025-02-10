@@ -68,4 +68,7 @@ Route::group(['middleware' => 'customer'], function () {
     // Checkout / Pembayaran
     Route::get("checkout", [CartController::class, 'checkout'])->name('checkout');
     Route::post("checkout-detail", [TransactionController::class, 'storeTransaction'])->name('checkout.detail');
+
+    // Pembatalan Pesanan
+    Route::put("transaction-history/cancel/{id}", [TransactionController::class, "cancelTransaction"])->name("cancel-transaction");
 });

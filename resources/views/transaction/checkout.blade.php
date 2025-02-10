@@ -46,7 +46,7 @@
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="text-gray-700 mb-2 block">Alamat</label>
-                                <input type="text" disabled value="{{ auth()->user()->address }}" placeholder="Alamat" class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md border-2 focus:border-green-700" />
+                                <textarea disabled rows="3" style="resize: none;" placeholder="Alamat" class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md border-2 focus:border-green-700">{{ auth()->user()->address }}</textarea>
                             </div>
                             <div>
                                 <label class="text-gray-700 mb-2 block">Nomor Telepon</label>
