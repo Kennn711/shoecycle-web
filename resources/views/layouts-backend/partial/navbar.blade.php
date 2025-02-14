@@ -4,9 +4,21 @@
     </div>
     <div class="grow h-full flex items-center justify-center"></div>
     <div class="flex-none h-full text-center flex items-center justify-center space-x-4">
-        <button data-dropdown-toggle="invoice-dropdown" class="flex items-center justify-center bg-white transition-all duration-300 font-medium rounded-full text-lg p-2 text-center w-12 h-12">
-            <i class="bi bi-envelope-paper text-4xl"></i>
-        </button>
+
+        @if (auth()->user()->role == 'admin')
+            @php
+                $notificationCount = \App\Models\Transaction::where('customer_request', 'cancel')->count();
+            @endphp
+            <div class="relative">
+                <button data-dropdown-toggle="invoice-dropdown" class="flex items-center justify-center bg-white transition-all duration-300 font-medium rounded-full text-lg p-2 text-center w-12 h-12">
+                    <i class="bi bi-envelope-paper text-4xl"></i>
+                </button>
+                @if ($notificationCount > 0)
+                    <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">{{ $notificationCount }}</span>
+                @endif
+            </div>
+        @endif
+
         <div class="relative">
             <button id="dropdownProfileButton" data-dropdown-toggle="dropdown" class="flex items-center justify-center bg-white transition-all duration-300 font-medium rounded-full text-sm p-0.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 @if (!empty(auth()->user()->avatar))
@@ -38,8 +50,20 @@
                     </li>
                 </ul>
             </div>
-            <div id="invoice-dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-2xl shadow w-44 dark:bg-gray-700 absolute right-0 mt-2">
-                {{-- Incoming Changes hehe --}}
+            <div id="invoice-dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-2xl shadow w-80 dark:bg-gray-700 absolute right-0 mt-2">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                    @php
+                        $cancelTransactions = \App\Models\Transaction::where('customer_request', 'cancel')->get();
+                    @endphp
+
+                    @foreach ($cancelTransactions as $transaction)
+                        <li class="flex items-center px-4 py-2 hover:bg-gray-200 transition-colors duration-300 dark:hover:bg-gray-600 dark:hover:text-white">
+                            <i class="bi bi-bell-fill text-xl text-blue-500"></i>
+                            <span class="ml-2">Pesanan : <b>{{ $transaction->code }}</b> Mengajukan Pembatalan</span>
+                            <a href="{{ route('transaction.index') }}" class="ml-auto bg-blue-500 text-white px-3 py-1 rounded-full">Lihat</a>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

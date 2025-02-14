@@ -69,9 +69,18 @@
                 </div>
                 <div class="text-right mr-3 mt-12">
                     @php $modalCancelReason = "modalCancelReason-" . $see->id; @endphp
-                    <button data-modal-target="{{ $modalCancelReason }}" data-modal-toggle="{{ $modalCancelReason }}" class="relative mr-6 hover:shadow-lg hover:scale-105 transition duration-500 before:absolute before:inset-0 before:rounded-lg overflow-hidden rounded-lg w-[210px] h-12 bg-red-500">
-                        <span class="relative text-white font-bold px-8 py-8"> Ajukan Pembatalan </span>
-                    </button>
+                    @if ($see->customer_request == 'none' || empty($see->customer_request))
+                        <button data-modal-target="{{ $modalCancelReason }}" data-modal-toggle="{{ $modalCancelReason }}" class="relative mr-6 hover:shadow-lg hover:scale-105 transition duration-500 before:absolute before:inset-0 before:rounded-lg overflow-hidden rounded-lg w-[210px] h-12 bg-red-500">
+                            <span class="relative text-white font-bold px-8 py-8"> Ajukan Pembatalan </span>
+                        </button>
+                    @endif
+
+                    @if ($see->customer_request == 'cancel')
+                        <button class="relative mr-6 hover:shadow-lg hover:scale-105 transition duration-500 before:absolute before:inset-0 before:rounded-lg overflow-hidden rounded-lg w-[300px] h-12 bg-red-500">
+                            <span class="relative text-white font-bold px-8 py-8"> Telah Mengajukan Pembatalan </span>
+                        </button>
+                    @endif
+
 
                     @if ($see->transaction_status == 'pending')
                         <button disabled class="relative overflow-hidden rounded-lg w-[190px] h-12 bg-gray-400">

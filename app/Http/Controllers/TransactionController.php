@@ -143,8 +143,20 @@ class TransactionController extends Controller
     public function cancelTransaction(Request $request, $id)
     {
         $transaction = Transaction::findOrFail($id);
+        $validate = $request->validate([
+            'cancel_reason' => 'required'
+        ]);
 
-        dd($transaction);
+        $transaction->cancel_reason = $validate['cancel_reason'];
+        $transaction->customer_request = 'cancel';
+        $transaction->save();
+
+        $message = [
+            "type-messgae" => "success",
+            "message" => "Berhasil mengajukan pembatalan pesanan <b>$transaction->code</b>"
+        ];
+
+        return redirect()->back()->with($message);
     }
 
     // Switch Status Transaksi
